@@ -10,6 +10,5 @@ export const findBooksBySearchTerm = async (term) => {
 
 export const findBookByWorkID = async (workID) => {
     const response = await axios.get(`${DETAILS_URL}${workID}.json`);
-    console.log("asdsd")
     return response.data;
 }
