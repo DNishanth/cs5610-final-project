@@ -7,6 +7,8 @@ import {Provider} from "react-redux";
 import bookSearchReducer from "./search/search-reducer";
 import bookDetailsReducer from "./details/details-reducer";
 import DetailsComponent from "./details";
+import LoginComponent from "./login";
+import ProfileComponent from "./profile";
 
 const store = configureStore({
     reducer: {
@@ -24,6 +26,8 @@ function App() {
                         <Route index element={<HomeComponent/>}/>
                         <Route path="/home" element={<HomeComponent/>}/>
                         <Route path="/details/:workID" element={<DetailsComponent/>}/>
+                        <Route path="/login" element={<LoginComponent/>}/>
+                        <Route path="/profile" element={<ProfileComponent/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>
