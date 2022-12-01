@@ -5,6 +5,8 @@ const API_BASE = "http://localhost:4000/api";
 
 export const registerUser = async (user) => {
     const response = await axios.post(`${API_BASE}/register`, user);
+    console.log("register useerv service");
+    console.log(user);
     return response.data;
 }
 
