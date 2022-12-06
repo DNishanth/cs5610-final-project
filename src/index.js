@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './vendors/bootstrap.min.css';
 // TODO: import bootswatch theme
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
