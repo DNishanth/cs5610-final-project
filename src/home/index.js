@@ -19,9 +19,7 @@ const HomeComponent = () =>
                     <li className="nav-item">
                         <a href="/" className="nav-link">Profile</a>
                     </li>
-                    <li className="nav-item">
-                        <a href="/" className="nav-link" >Details</a>
-                    </li>
+
                 </ul>
             </div>
             <div className="col-5 mt-1 wd-searchbar" align="center">
@@ -53,6 +51,9 @@ const HomeComponent = () =>
                 <div className="wd-about-content" align="left">
                     <p>Create your own Athenaeum profile to create reviews, as well as customize your own favorites and searches. </p>
                 </div>
+                <br/><br/>
+                <h2 className="wd-about-heading" align="left">See the latest from our users:</h2>
+                
             </div>
 
         </div>
