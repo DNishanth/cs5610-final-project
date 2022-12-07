@@ -2,6 +2,7 @@ import SearchComponent from "../search";
 import LogoComponent from "./logo";
 import "./index.css";
 
+// NOT logged in home screen
 const HomeComponent = () =>
     <div className="wd-homepage">
         <div className="row">
@@ -28,7 +29,7 @@ const HomeComponent = () =>
             <div className="col-2">
                 <ul className="nav nav-pills mb-2 mt-2 ms-5">
                     <li className="nav-item">
-                        <a href="/" className="nav-link">Login</a>
+                        <a href="/login" className="nav-link">Login</a>
                     </li>
                     <li className="nav-item">
                         <a href="/" className="nav-link">Register</a>
@@ -47,7 +48,9 @@ const HomeComponent = () =>
                     <br/>Easily search for works by title, author, or subject.</p>
                 </div>
                 <br/><br/>
-                <h2 className="wd-about-heading" align="left">Create a Profile</h2>
+                <a href="/register" className="wd-homepage-link">
+                    <h2 className="wd-about-heading" align="left">Create a Profile</h2>
+                </a>
                 <div className="wd-about-content" align="left">
                     <p>Create your own Athenaeum profile to create reviews, as well as customize your own favorites and searches. </p>
                 </div>

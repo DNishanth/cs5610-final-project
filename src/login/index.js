@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {registerThunk} from "./user-thunks";
+import {Link} from "react-router-dom";
 import "./index.css";
 
 const LoginComponent = () => {
@@ -18,10 +19,12 @@ const LoginComponent = () => {
     }
     return (
         <div>
-            <h5>
-                <i class="fa-solid fa-arrow-left me-2"></i>
-                Back to Home
-            </h5>
+            <a href="/home">
+                <h5>
+                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    Back to Home
+                </h5>
+            </a>
             <div align="center">
                 <h1 className="mb-5">Login</h1>
                 <label htmlFor="username" className="form-label">Username</label>
@@ -35,7 +38,7 @@ const LoginComponent = () => {
                     <button className="wd-login-button mt-5 mb-3" onClick={loginUser}>Login</button>
                     <br/>
                     <p className="mt-4">Don't have an account?</p>
-                    <button className="wd-register-button" onClick={registerUser}>Register</button>
+                    <Link to="/register" className="wd-register-button">Register</Link>
             </div>
         </div>
     )

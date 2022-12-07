@@ -10,8 +10,13 @@
 .wd-about-heading {
     width: 52%;
     color: #158CBA;
+    text-decoration: none;
 }
 
 .wd-about-content {
     width: 50%
+}
+
+.wd-homepage-link {
+    text-decoration: none;
 }
