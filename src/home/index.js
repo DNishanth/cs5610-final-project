@@ -15,7 +15,7 @@ const HomeComponent = () =>
                         <a href="/home" className="nav-link active">Home</a>
                     </li>
                     <li className="nav-item">
-                        <a href="/" className="nav-link ">Search</a>
+                        <a href="/search" className="nav-link ">Search</a>
                     </li>
                     <li className="nav-item">
                         <a href="/profile" className="nav-link">Profile</a>
