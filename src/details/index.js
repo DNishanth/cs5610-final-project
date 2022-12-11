@@ -28,7 +28,8 @@ const DetailsComponent = () => {
     // console.log(bookDetails)
     return (
         <div>
-            <Link to={"/home"}>
+            {/*TODO: Extra: Link back to search results, maybe use state to keep search term?*/}
+            <Link to={"/search"}>
                 <i className="fa-solid fa-lg fa-arrow-left"></i>
             </Link>
             <h1>Details</h1>

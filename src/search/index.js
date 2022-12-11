@@ -1,14 +1,10 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import {useLocation} from "react-router";
 
-const SearchBarComponent = () => {
-    const {pathname} = useLocation();
-    const searchParam = pathname.split('/')[2];
-    const [searchTerm, setSearchTerm] = useState(searchParam ? searchParam : "");
+const SearchBarComponent = (query) => {
+    const [searchTerm, setSearchTerm] = useState(query.searchTerm ? query.searchTerm : "");
     return (
     <div>
-        <div> This is the search bar from search bar class</div>
         <ul className="list-group">
             <li className="list-group-item">
                 <Link to={"/search/" + searchTerm}>

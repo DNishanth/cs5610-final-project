@@ -14,9 +14,8 @@ const SearchResultsComponent = () => {
     }, [searchQuery]);
     return (
         <div>
-            <div>This is the search results page</div>
             <ul className="list-group">
-                <SearchBarComponent/>
+                <SearchBarComponent searchTerm={searchQuery}/>
                 {bookSearchResults.docs && bookSearchResults.docs.map(result => (
                     <li key={result.key} className="list-group-item">
                         <Link to={"/details/" + result.key.split("/")[2]}>

@@ -1,4 +1,4 @@
-import SearchComponent from "../search";
+import SearchBarComponent from "../search";
 import LogoComponent from "./logo";
 import "./index.css";
 
@@ -24,7 +24,7 @@ const HomeComponent = () =>
                 </ul>
             </div>
             <div className="col-5 mt-1 wd-searchbar" align="center">
-                <SearchComponent/>
+                <SearchBarComponent/>
             </div>
             <div className="col-2">
                 <ul className="nav nav-pills mb-2 mt-2 ms-5">
