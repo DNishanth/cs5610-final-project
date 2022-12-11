@@ -20,7 +20,9 @@ const DetailsComponent = () => {
     // TODO: check deps needed, most likely empty if this runs once
 
     const postReviewHandler = () => {
-        dispatch(postReviewThunk({workID, reviewText}));
+        if (reviewText.trim()) {
+            dispatch(postReviewThunk({workID, reviewText}));
+        }
     }
 
     // console.log(bookDetails)
@@ -50,11 +52,11 @@ const DetailsComponent = () => {
                           onChange={(e) => setReviewText(e.target.value)}>
                 </textarea>
                 {/*TODO: add text/current user*/}
-                <button type="button" className="btn btn-success float-end"
-                        onClick={postReviewHandler}>
-                    Post
-                </button>
             </div>
+            <button type="button" className="btn btn-success"
+                    onClick={postReviewHandler}>
+                Post
+            </button>
             <div>
                 {/*TODO: Is reviews true check needed? add key*/}
                 {reviews && reviews.map(review => (
