@@ -6,6 +6,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import bookSearchReducer from "./search/search-reducer";
 import bookDetailsReducer from "./details/details-reducer";
+import reviewsReducer from "./details/reviews-reducer";
 import DetailsComponent from "./details";
 import LoginComponent from "./login";
 import ProfileComponent from "./profile";
@@ -13,7 +14,8 @@ import ProfileComponent from "./profile";
 const store = configureStore({
     reducer: {
         books: bookSearchReducer,
-        details: bookDetailsReducer
+        details: bookDetailsReducer,
+        reviews: reviewsReducer
     }
 })
 

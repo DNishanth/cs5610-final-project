@@ -1,18 +1,29 @@
 import {useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {findBookByWorkIDThunk} from "../services/open-library-thunks";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {postReviewThunk, getReviewsByWorkIDThunk} from "./review-thunks";
 
 const DetailsComponent = () => {
     const {pathname} = useLocation();
     const workID = pathname.split('/')[2];
     const {bookDetails} = useSelector((state) => state.details);
+    const {reviews} = useSelector((state) => state.reviews);
+    const [reviewText, setReviewText] = useState();
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(findBookByWorkIDThunk(workID));
-    }, [workID]);
-    console.log(bookDetails)
+        dispatch(getReviewsByWorkIDThunk(workID));
+    }, []);
+    // TODO: check deps needed, most likely empty if this runs once
+
+    const postReviewHandler = () => {
+        dispatch(postReviewThunk({workID, reviewText}));
+    }
+
+    // console.log(bookDetails)
     return (
         <div>
             <Link to={"/home"}>
@@ -22,17 +33,36 @@ const DetailsComponent = () => {
             {
                 bookDetails.length !== 0 &&
                 <div>
-                    {bookDetails.title}
-                    <br/>
-                    {("covers" in bookDetails) &&
-                        <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
-                    <br/>
-                    {("description" in bookDetails) ?
-                        bookDetails.description :
-                        "Description not available"}
+                     {bookDetails.title}
+                     <br/>
+                     {("covers" in bookDetails) &&
+                         <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
+                     <br/>
+                     {("description" in bookDetails) && ("value" in bookDetails.description) ?
+                         bookDetails.description.value :
+                         null}
                 </div>
             }
-            Create and display reviews here
+            <br/>
+            <div className="form-group">
+                <label htmlFor="wd-review-input">Write a review</label>
+                <textarea className="form-control" id="wd-review-input" rows="4"
+                          onChange={(e) => setReviewText(e.target.value)}>
+                </textarea>
+                {/*TODO: add text/current user*/}
+                <button type="button" className="btn btn-success float-end"
+                        onClick={postReviewHandler}>
+                    Post
+                </button>
+            </div>
+            <div>
+                {/*TODO: Is reviews true check needed? add key*/}
+                {reviews && reviews.map(review => (
+                    <li key={review._id} className="list-group-item">
+                        {review.reviewText}
+                    </li>
+                ))}
+            </div>
         </div>
     )}
 export default DetailsComponent;
