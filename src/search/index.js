@@ -21,7 +21,8 @@ const SearchComponent = () => {
                 <input
                     className="form-control w-75"
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    value={searchTerm}/>
+                    value={searchTerm}
+                    placeholder="Search book title, author, etc."/>
             </li>
             {bookSearchResults.docs && bookSearchResults.docs.map(result => (
                 <li key={result.key} className="list-group-item">

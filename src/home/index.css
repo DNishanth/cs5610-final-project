@@ -1,0 +1,22 @@
+.wd-homepage {
+    margin-left:-80px;
+    margin-right: -60px
+}
+
+.wd-searchbar {
+    margin-left: -150px
+}
+
+.wd-about-heading {
+    width: 52%;
+    color: #158CBA;
+    text-decoration: none;
+}
+
+.wd-about-content {
+    width: 50%
+}
+
+.wd-homepage-link {
+    text-decoration: none;
+}
