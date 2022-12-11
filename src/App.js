@@ -12,6 +12,7 @@ import LoginComponent from "./login";
 import ProfileComponent from "./profile";
 import RegisterComponent from "./register";
 import SearchPageComponent from "./search-page.js";
+import SearchResultsComponent from "./search/search-results";
 
 const store = configureStore({
     reducer: {
@@ -33,6 +34,7 @@ function App() {
                         <Route path="/login" element={<LoginComponent/>}/>
                         <Route path="/register" element={<RegisterComponent/>}/>
                         <Route path="/search" element={<SearchPageComponent/>}/>
+                        <Route path="/search/:searchQuery" element={<SearchResultsComponent/>}/>
                         <Route path="/profile" element={<ProfileComponent/>}/>
                     </Routes>
                 </div>
