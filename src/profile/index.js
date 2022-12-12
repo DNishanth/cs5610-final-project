@@ -61,11 +61,6 @@ const ProfileComponent = () => {
                     {currentUser.role}
                 </div>}
             </div>
-            <Link to={"/home"}>
-                <button>
-asasd
-                </button>
-            </Link>
         </div>
     )
 }

@@ -5,7 +5,7 @@ export const registerThunk = createAsyncThunk('registerUser',
     (user) => registerUser(user));
 
 export const loginThunk = createAsyncThunk('loginUser',
-    (user) => loginUser());
+    (userCred) => loginUser(userCred));
 
 export const logoutThunk = createAsyncThunk('logoutUser',
     () => logoutUser());

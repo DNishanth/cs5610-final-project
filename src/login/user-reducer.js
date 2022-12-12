@@ -11,10 +11,7 @@ const userReducer = createSlice({
     initialState: initialState,
     extraReducers: {
         [registerThunk.fulfilled]: (state, action) => {
-            console.log("register fulfilled")
             state.currentUser = action.payload;
-            console.log(state.currentUser)
-
         },
         [registerThunk.pending]: (state, action) => {
             state.error = null;
@@ -23,7 +20,13 @@ const userReducer = createSlice({
             state.error = "Error: This user already exists, try again";
         },
         [loginThunk.fulfilled]: (state, action) => {
-
+            state.currentUser = action.payload;
+        },
+        [loginThunk.pending]: (state, action) => {
+            state.error = null;
+        },
+        [loginThunk.rejected]: (state, action) => {
+            state.error = "Error: This user does not exist, try again or register for an account";
         },
         [logoutThunk.fulfilled]: (state, action) => {
 

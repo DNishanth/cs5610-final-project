@@ -45,7 +45,8 @@ const RegisterComponent = () => {
                 <h1>Create your Athenaeum Account</h1>
             </div>
             <div align="center">
-                {error && <div>{error} TODO: add css</div>}
+                {error && <div>{error}</div>}
+                {/*TODO: add css*/}
                 <label htmlFor="firstName" className="form-label mt-3">First Name</label>
                 <input type="text" className="form-control w-25" id="firstName" placeholder="Enter your first name"
                        onChange={(e) => setFirstName(e.target.value)}></input>
@@ -56,6 +57,7 @@ const RegisterComponent = () => {
                 <input type="text" className="form-control w-25" id="username" placeholder="Enter your username"
                        onChange={(e) => setUsername(e.target.value)}></input>
                 <label htmlFor="password" className="form-label mt-3">Password</label>
+                {/*TODO: Change so password is hidden while typing*/}
                 <input type="text" className="form-control w-25" id="password" placeholder="Enter your password"
                        onChange={(e) => setPassword(e.target.value)}></input>
                 <label htmlFor="phone" className="form-label mt-3">Phone</label>
