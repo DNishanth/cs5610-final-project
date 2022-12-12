@@ -1,7 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {loginThunk, logoutThunk, profileThunk, registerThunk} from "./user-thunks";
 
 const initialState = {
-    currentUser: null
+    currentUser: null,
+    error: null
 }
 
 const userReducer = createSlice({
@@ -9,7 +11,16 @@ const userReducer = createSlice({
     initialState: initialState,
     extraReducers: {
         [registerThunk.fulfilled]: (state, action) => {
+            console.log("register fulfilled")
+            state.currentUser = action.payload;
+            console.log(state.currentUser)
 
+        },
+        [registerThunk.pending]: (state, action) => {
+            state.error = null;
+        },
+        [registerThunk.rejected]: (state, action) => {
+            state.error = "Error: This user already exists, try again";
         },
         [loginThunk.fulfilled]: (state, action) => {
 

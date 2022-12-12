@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./user-thunks";
 import {Link} from "react-router-dom";
 import "./index.css";
@@ -12,16 +12,12 @@ const LoginComponent = () => {
     const loginUser = () => {
 
     }
-    const registerUser = () => {
-        console.log(username);
-        console.log(password);
-        dispatch(registerThunk({username, password}));
-    }
+
     return (
         <div>
             <a href="/home">
                 <h5>
-                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    <i className="fa-solid fa-arrow-left me-2"></i>
                     Back to Home
                 </h5>
             </a>

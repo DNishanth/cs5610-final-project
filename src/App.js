@@ -7,18 +7,21 @@ import {Provider} from "react-redux";
 import bookSearchReducer from "./search/search-reducer";
 import bookDetailsReducer from "./details/details-reducer";
 import reviewsReducer from "./details/reviews-reducer";
+import usersReducer from "./login/user-reducer"
 import DetailsComponent from "./details";
 import LoginComponent from "./login";
 import ProfileComponent from "./profile";
 import RegisterComponent from "./register";
 import SearchPageComponent from "./search-page.js";
 import SearchResultsComponent from "./search/search-results";
+import ProtectedRoute from "./profile/protected-route";
 
 const store = configureStore({
     reducer: {
         books: bookSearchReducer,
         details: bookDetailsReducer,
-        reviews: reviewsReducer
+        reviews: reviewsReducer,
+        users: usersReducer
     }
 })
 
@@ -35,7 +38,11 @@ function App() {
                         <Route path="/register" element={<RegisterComponent/>}/>
                         <Route path="/search" element={<SearchPageComponent/>}/>
                         <Route path="/search/:searchQuery" element={<SearchResultsComponent/>}/>
-                        <Route path="/profile" element={<ProfileComponent/>}/>
+                        <Route path="/profile" element={
+                            <ProtectedRoute>
+                                <ProfileComponent/>
+                            </ProtectedRoute>
+                        }/>
                     </Routes>
                 </div>
             </BrowserRouter>

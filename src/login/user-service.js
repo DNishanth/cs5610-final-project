@@ -2,11 +2,10 @@ import axios from "axios";
 
 // const API_BASE = process.env.API_BASE;
 const API_BASE = "http://localhost:4000/api";
+const credentialAPI = axios.create({withCredentials: true});
 
 export const registerUser = async (user) => {
-    const response = await axios.post(`${API_BASE}/register`, user);
-    console.log("register useerv service");
-    console.log(user);
+    const response = await credentialAPI.post(`${API_BASE}/register`, user);
     return response.data;
 }
 
