@@ -1,18 +1,14 @@
 import {useSelector} from "react-redux";
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
+// Guarantee user is logged in before viewing child pages
 const ProtectedRoute = ({children}) => {
-    const navigate = useNavigate();
     const {currentUser} = useSelector((state) => state.users);
-    console.log("Protected route: checking if curr user exists");
-    console.log(currentUser);
     if (currentUser) {
         return children;
     }
     else {
-        return (
-            <Navigate to={'/login'}/>
-        )
+        return <Navigate to={'/login'}/>
     }
 }
 export default ProtectedRoute

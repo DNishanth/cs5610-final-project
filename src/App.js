@@ -15,6 +15,7 @@ import RegisterComponent from "./register";
 import SearchPageComponent from "./search-page.js";
 import SearchResultsComponent from "./search/search-results";
 import ProtectedRoute from "./profile/protected-route";
+import CurrentUserProfile from "./profile/current-user-profile";
 
 const store = configureStore({
     reducer: {
@@ -29,22 +30,24 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <div className="container">
-                    <Routes>
-                        <Route index element={<HomeComponent/>}/>
-                        <Route path="/home" element={<HomeComponent/>}/>
-                        <Route path="/details/:workID" element={<DetailsComponent/>}/>
-                        <Route path="/login" element={<LoginComponent/>}/>
-                        <Route path="/register" element={<RegisterComponent/>}/>
-                        <Route path="/search" element={<SearchPageComponent/>}/>
-                        <Route path="/search/:searchQuery" element={<SearchResultsComponent/>}/>
-                        <Route path="/profile" element={
-                            <ProtectedRoute>
-                                <ProfileComponent/>
-                            </ProtectedRoute>
-                        }/>
-                    </Routes>
-                </div>
+                <CurrentUserProfile>
+                    <div className="container">
+                        <Routes>
+                            <Route index element={<HomeComponent/>}/>
+                            <Route path="/home" element={<HomeComponent/>}/>
+                            <Route path="/details/:workID" element={<DetailsComponent/>}/>
+                            <Route path="/login" element={<LoginComponent/>}/>
+                            <Route path="/register" element={<RegisterComponent/>}/>
+                            <Route path="/search" element={<SearchPageComponent/>}/>
+                            <Route path="/search/:searchQuery" element={<SearchResultsComponent/>}/>
+                            <Route path="/profile" element={
+                                <ProtectedRoute>
+                                    <ProfileComponent/>
+                                </ProtectedRoute>
+                            }/>
+                        </Routes>
+                    </div>
+                </CurrentUserProfile>
             </BrowserRouter>
         </Provider>
     );

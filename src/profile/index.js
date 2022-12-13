@@ -1,9 +1,11 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import SearchBarComponent from "../search";
 import "./index.css";
-import {Link, Navigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {logoutThunk} from "../login/user-thunks";
 
 const ProfileComponent = () => {
+    const dispatch = useDispatch();
     const {currentUser} = useSelector((state) => state.users);
     console.log(currentUser)
     return (
@@ -60,6 +62,7 @@ const ProfileComponent = () => {
                     <br/>
                     {currentUser.role}
                 </div>}
+                <button onClick={() => dispatch(logoutThunk())}>Logout</button>
             </div>
         </div>
     )

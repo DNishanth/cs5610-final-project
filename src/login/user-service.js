@@ -10,16 +10,16 @@ export const registerUser = async (user) => {
 }
 
 export const loginUser = async (userCred) => {
-    const response = await axios.post(`${API_BASE}/login`, userCred);
+    const response = await credentialAPI.post(`${API_BASE}/login`, userCred);
     return response.data;
 }
 
 export const logoutUser = async (user) => {
-    const response = await axios.post(`${API_BASE}/login`, user);
+    const response = await credentialAPI.post(`${API_BASE}/logout`, user);
     return response.data;
 }
 
 export const getProfile = async () => {
-    const response = await axios.get(`${API_BASE}/profile`);
+    const response = await credentialAPI.get(`${API_BASE}/profile`);
     return response.data;
 }

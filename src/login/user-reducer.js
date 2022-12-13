@@ -29,10 +29,10 @@ const userReducer = createSlice({
             state.error = "Error: This user does not exist, try again or register for an account";
         },
         [logoutThunk.fulfilled]: (state, action) => {
-
+            state.currentUser = null;
         },
         [profileThunk.fulfilled]: (state, action) => {
-
+            state.currentUser = action.payload;
         },
     }
 })
