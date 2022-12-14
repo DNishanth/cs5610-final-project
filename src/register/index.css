@@ -9,3 +9,10 @@
 .wd-corner-logo {
     text-decoration: none;
 }
+
+.wd-radio-buttons {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    width: 40%
+}
