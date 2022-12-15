@@ -25,7 +25,6 @@ const DetailsComponent = () => {
         }
     }
 
-    // console.log(bookDetails)
     return (
         <div>
             {/*TODO: Extra: Link back to search results, maybe use state to keep search term?*/}
@@ -41,9 +40,9 @@ const DetailsComponent = () => {
                      {("covers" in bookDetails) &&
                          <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
                      <br/>
-                     {("description" in bookDetails) && ("value" in bookDetails.description) ?
-                         bookDetails.description.value :
-                         null}
+
+                    {typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
+                        <div>{bookDetails.description.value}</div>}
                 </div>
             }
             <br/>
