@@ -4,8 +4,11 @@ import {findBookByWorkIDThunk} from "../services/open-library-thunks";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {postReviewThunk, getReviewsByWorkIDThunk} from "./review-thunks";
+import './index.css'
+
 
 const DetailsComponent = () => {
+    const {currentUser} = useSelector((state) => state.users);
     const {pathname} = useLocation();
     const workID = pathname.split('/')[2];
     const {bookDetails} = useSelector((state) => state.details);
@@ -58,13 +61,22 @@ const DetailsComponent = () => {
                     onClick={postReviewHandler}>
                 Post
             </button>
-            <div>
+            <br/><br/><br/>
+            <p>Past Reviews:</p>
+            <div className="wd-review-box">
                 {/*TODO: Is reviews true check needed? add key*/}
                 {reviews && reviews.map(review => (
                     <li key={review._id} className="list-group-item">
-                        <Link to={"/profile/" + review.reviewer}>
+                        <span>
+                            <div>
+                                <Link to={"/profile/" + review.reviewer} className="wd-review-username">
+                                    <b>{currentUser.username}</b>:
+                                </Link>
+                            </div>
+                            &nbsp;&nbsp;&nbsp;
                             {review.reviewText}
-                        </Link>
+                            <hr></hr>
+                        </span>
                     </li>
                 ))}
             </div>
