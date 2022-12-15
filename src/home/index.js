@@ -122,21 +122,19 @@ const LoggedInHomeComponent = () => {
                     <br/>
                     <h2 className="wd-about-heading" align="left">View Your Follows:</h2>
                     <br/><br/>
-                    <h2 className="wd-about-heading" align="left">View Your Reviews:</h2>
-                    <ul className="list-group">
+                    <h2 className="wd-about-heading" align="left">See Your Latest Reviews:</h2>
+                    <ul className="list-group wd-reviews-list">
                         {/*Slice limits the reviews displayed*/}
                         {user_reviews && user_reviews.slice(0, 5).map(review => (
                             <li key={review._id} className="list-group-item">
-                                <Link to={"/details/" + review.workID}>
-                                    Go to review
-                                </Link>
                                 <div>{review.reviewText}</div>
+                                <Link to={"/details/" + review.workID} className="wd-review-link">
+                                    Go to review <i class="fa-solid fa-chevron-right"></i>
+                                </Link>   
                             </li>
                         ))}
                     </ul>
                     <br/><br/>
-                    <h2 className="wd-about-heading" align="left">See the latest from our users:</h2>
-
                 </div>
 
             </div>

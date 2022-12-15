@@ -20,3 +20,12 @@
 .wd-homepage-link {
     text-decoration: none;
 }
+
+.wd-reviews-list {
+    width: 50%;
+    border-radius: 25px;
+}
+
+.wd-review-link {
+    text-decoration: none;
+}
