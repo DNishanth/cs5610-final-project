@@ -23,7 +23,7 @@ const HomeComponent = () => {
                             <a href="/search" className="nav-link ">Search</a>
                         </li>
                         <li className="nav-item nav-link">
-                            <Link to={"/profile"}>
+                            <Link to={"/profile"} style={{textDecoration: "none"}}>
                                 Profile
                             </Link>
                         </li>

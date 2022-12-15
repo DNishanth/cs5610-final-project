@@ -17,7 +17,7 @@ const ProfileComponent = () => {
                             <a href="/home" className="nav-link">Athenaeum</a>
                         </h2>
                         <li className="nav-item nav-link">
-                            <Link to={"/home"}>
+                            <Link to={"/home"} style={{textDecoration: 'none'}}>
                                 Home
                             </Link>
                         </li>
@@ -44,25 +44,36 @@ const ProfileComponent = () => {
                     </ul>
                 </div>
             </div>
-            <div>
+            <div className="col-auto ms-4" align="center">
+                <h2 className="wd-profile-header">Your Athenaeum Profile</h2>
                 {/*Example list to show current user fields*/}
                 {currentUser &&
                 <div>
-                    {currentUser.username}
+                    <label htmlFor="firstName" className="form-label mt-3 ">Your First Name:</label>
+                    <input type="text" className="form-control w-auto" id="firstName" value={currentUser.firstName}></input>
                     <br/>
-                    {currentUser.password}
+                    <label htmlFor="lastName" className="form-label mt-3 ">Your Last Name:</label>
+                    <input type="text" className="form-control w-auto" id="lastName" value={currentUser.lastName}></input>
                     <br/>
-                    {currentUser.firstName}
+                    <label htmlFor="username" className="form-label mt-3 ">Your Username:</label>
+                    <input type="text" className="form-control w-auto" id="username" value={currentUser.username}></input>
                     <br/>
-                    {currentUser.lastName}
+                    <label htmlFor="password" className="form-label mt-3 ">Your Password:</label>
+                    <input type="text" className="form-control w-auto" id="password" value={currentUser.password}></input>
                     <br/>
-                    {currentUser.phone}
+                    <label htmlFor="phone" className="form-label mt-3 ">Your Phone:</label>
+                    <input type="text" className="form-control w-auto" id="phone" value={currentUser.phone}></input>
                     <br/>
-                    {currentUser.email}
+                    <label htmlFor="email" className="form-label mt-3 ">Your Email:</label>
+                    <input type="text" className="form-control w-auto" id="email" value={currentUser.email}></input>
                     <br/>
-                    {currentUser.role}
+                    <label htmlFor="role" className="form-label mt-3 ">Role:</label>
+                    <input type="text" className="form-control w-auto" id="role" value={currentUser.role}></input>
+                    <br/>
+                    <br/>
                 </div>}
-                <button onClick={() => dispatch(logoutThunk())}>Logout</button>
+                <button className="wd-logout-button" onClick={() => dispatch(logoutThunk())}>Logout</button>
+                <br/><br/>
             </div>
         </div>
     )
