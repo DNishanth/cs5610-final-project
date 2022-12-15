@@ -69,6 +69,7 @@ const ReaderDetailsComponent = () => {
                     onClick={postReviewHandler}>
                 Post
             </button>
+            <br/><br/>
             <ul className="list-group">
                 <p>Past Reviews:</p>
                 {/*TODO: Is reviews true check needed? add key*/}
@@ -86,9 +87,11 @@ const ReaderDetailsComponent = () => {
                     </li>
                 ))}
             </ul>
+            <br/><br/>
             <ul className="list-group">
                 <p>Past Book Discussions:</p>
             </ul>
+            <br/><br/>
             <ul className="list-group">
                 <p>Moderators' Notes:</p>
             </ul>
@@ -161,6 +164,7 @@ const ReaderDetailsComponent = () => {
                     <p>Past Book Discussions:</p>
 
                 </ul>
+                <br/><br/>
                 <ul className="list-group">
                     <p>Past Reviews:</p>
                     {/*TODO: Is reviews true check needed? add key*/}
@@ -174,6 +178,7 @@ const ReaderDetailsComponent = () => {
                         </li>
                     ))}
                 </ul>
+                <br/><br/>
                 <ul className="list-group">
                     <p>Moderators' Notes</p>
                 </ul>
@@ -227,6 +232,7 @@ const ModeratorDetailsComponent = () => {
             }
             <br/>
             {error && <div>{error}</div>}
+            
             {/*TODO: make showing the error a toast/notification?*/}
             <div className="form-group">
                 <label htmlFor="wd-review-input">Moderator's Note:</label>
@@ -253,9 +259,11 @@ const ModeratorDetailsComponent = () => {
                     </li>
                 ))}
             </ul>
+            <br/><br/>
             <ul className="list-group">
                 <p>Past Book Discussions:</p>
             </ul>
+            <br/><br/>
             <ul className="list-group">
                 <p>Moderators' Notes:</p>
             </ul>
@@ -314,6 +322,7 @@ const LoggedOutDetailsComponent = () => {
             <ul className="list-group">
                 <p>Past Book Discussions:</p>
             </ul>
+            <br/><br/>
             <ul className="list-group">
                 <p>Past Reviews:</p>
                 {/*TODO: Is reviews true check needed? add key*/}
@@ -327,6 +336,7 @@ const LoggedOutDetailsComponent = () => {
                     </li>
                 ))}
             </ul>
+            <br/><br/>
             <ul className="list-group">
                 <p>Moderators' Notes:</p>
             </ul>
