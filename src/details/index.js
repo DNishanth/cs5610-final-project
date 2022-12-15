@@ -70,6 +70,7 @@ const ReaderDetailsComponent = () => {
                 Post
             </button>
             <ul className="list-group">
+                <p>Past Reviews:</p>
                 {/*TODO: Is reviews true check needed? add key*/}
                 {reviews && reviews.map(review => (
                     <li key={review._id} className="list-group-item">
@@ -84,6 +85,12 @@ const ReaderDetailsComponent = () => {
                         }
                     </li>
                 ))}
+            </ul>
+            <ul className="list-group">
+                <p>Past Book Discussions:</p>
+            </ul>
+            <ul className="list-group">
+                <p>Moderators' Notes:</p>
             </ul>
         </div>
     )}
@@ -167,6 +174,9 @@ const ReaderDetailsComponent = () => {
                         </li>
                     ))}
                 </ul>
+                <ul className="list-group">
+                    <p>Moderators' Notes</p>
+                </ul>
             </div>
         )}
 
@@ -219,7 +229,7 @@ const ModeratorDetailsComponent = () => {
             {error && <div>{error}</div>}
             {/*TODO: make showing the error a toast/notification?*/}
             <div className="form-group">
-                <label htmlFor="wd-review-input">Start your book discussion:</label>
+                <label htmlFor="wd-review-input">Moderator's Note:</label>
                 <textarea className="form-control" id="wd-review-input" rows="4"
                     onChange={(e) => setReviewText(e.target.value)}>
                 </textarea>
@@ -230,9 +240,6 @@ const ModeratorDetailsComponent = () => {
                 Post
             </button>
             <br/><br/>
-            <ul className="list-group">
-                <p>Past Book Discussions:</p>
-            </ul>
             <ul className="list-group">
                 <p>Past Reviews:</p>
                 {/*TODO: Is reviews true check needed? add key*/}
@@ -245,6 +252,12 @@ const ModeratorDetailsComponent = () => {
                         <div>{review.reviewText}</div>
                     </li>
                 ))}
+            </ul>
+            <ul className="list-group">
+                <p>Past Book Discussions:</p>
+            </ul>
+            <ul className="list-group">
+                <p>Moderators' Notes:</p>
             </ul>
         </div>
     )}
@@ -297,18 +310,6 @@ const LoggedOutDetailsComponent = () => {
             }
             <br/>
             {error && <div>{error}</div>}
-            {/*TODO: make showing the error a toast/notification?*/}
-            <div className="form-group">
-                <label htmlFor="wd-review-input">Start your book discussion:</label>
-                <textarea className="form-control" id="wd-review-input" rows="4"
-                    onChange={(e) => setReviewText(e.target.value)}>
-                </textarea>
-                {/*TODO: add text/current user*/}
-            </div>
-            <button type="button" className="btn btn-success"
-                onClick={postReviewHandler}>
-                Post
-            </button>
             <br/><br/>
             <ul className="list-group">
                 <p>Past Book Discussions:</p>
@@ -325,6 +326,9 @@ const LoggedOutDetailsComponent = () => {
                         <div>{review.reviewText}</div>
                     </li>
                 ))}
+            </ul>
+            <ul className="list-group">
+                <p>Moderators' Notes:</p>
             </ul>
         </div>
     )}
