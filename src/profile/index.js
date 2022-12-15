@@ -35,11 +35,8 @@ const ProfileComponent = () => {
                 </div>
                 <div className="col-2">
                     <ul className="nav nav-pills mb-2 mt-2 ms-3">
-                        <li className="nav-item">
-                            <a href="/register" className="nav-link">Login</a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="/register" className="nav-link">Register</a>
+                    <li className="nav-item">
+                            <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>
                         </li>
                     </ul>
                 </div>
