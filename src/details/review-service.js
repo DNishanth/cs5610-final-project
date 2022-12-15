@@ -18,3 +18,8 @@ export const getReviewsByUserID = async (userID) => {
     const response = await axios.get(`${REVIEW_API_BASE}/${userID}/reviews`);
     return response.data;
 }
+
+export const deleteReview = async (reviewID) => {
+    const response = await axios.delete(`${REVIEW_API_BASE}/${reviewID}`);
+    return response.data;
+}

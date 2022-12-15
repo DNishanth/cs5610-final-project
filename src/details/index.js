@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {findBookByWorkIDThunk} from "../services/open-library-thunks";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {postReviewThunk, getReviewsByWorkIDThunk} from "./review-thunks";
+import {postReviewThunk, getReviewsByWorkIDThunk, deleteReviewThunk} from "./review-thunks";
 import './index.css'
 
 
@@ -27,6 +27,7 @@ const DetailsComponent = () => {
             dispatch(getReviewsByWorkIDThunk(workID));
         }
     }
+    // TODO: if doesnt work try refresh page
 
     function formatRole(role) {
         const lower = role.toLowerCase()
@@ -74,8 +75,12 @@ const DetailsComponent = () => {
                         <Link to={"/profile/" + review.reviewer._id}>
                             {review.reviewer.firstName}
                         </Link>
-                        <div className={"float-end"}>{formatRole(review.reviewer.role)}</div>
+                        <div className="float-end">{formatRole(review.reviewer.role)}</div>
                         <div>{review.reviewText}</div>
+                        {review.reviewer.role === "MODERATOR" &&
+                            <i className="fa fa-trash float-end" aria-hidden="true"
+                               onClick={() => {dispatch(deleteReviewThunk(review._id))}}></i>
+                        }
                     </li>
                 ))}
             </ul>
