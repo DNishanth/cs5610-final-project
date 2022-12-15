@@ -6,6 +6,9 @@ import {Link} from "react-router-dom";
 import {postReviewThunk, getReviewsByWorkIDThunk, deleteReviewThunk} from "./review-thunks";
 import './index.css'
 import { current } from "@reduxjs/toolkit";
+import {logoutThunk} from "../login/user-thunks";
+import SearchBarComponent from "../search";
+
 
 
 const ReaderDetailsComponent = () => {
@@ -37,6 +40,37 @@ const ReaderDetailsComponent = () => {
 
     return (
         <div>
+            <div className="row">
+                <div className="col-6">
+                    <ul className="nav nav-pills mb-2 mt-2 ms-2">
+                        <h2 className="nav-item" style={{marginTop:"-11px"}}>
+                            <a href="/home" className="nav-link">Athenaeum</a>
+                        </h2>
+                        <li className="nav-item nav-link">
+                            <Link to={"/home"} style={{textDecoration: 'none'}}>
+                                Home
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/search" className="nav-link ">Search</a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/profile" className="nav-link active">Profile</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div className="col-5 mt-1 wd-searchbar" align="center">
+                    <SearchBarComponent/>
+                </div>
+                <div className="col-2">
+                    <ul className="nav nav-pills mb-2 mt-2 ms-3">
+                        <li className="nav-item">
+                            <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             {/*TODO: Extra: Link back to search results, maybe use state to keep search term?*/}
             <Link to={"/search"}>
                 <i className="fa-solid fa-lg fa-arrow-left"></i>
@@ -127,6 +161,37 @@ const ReaderDetailsComponent = () => {
     
         return (
             <div>
+                <div className="row">
+                    <div className="col-6">
+                        <ul className="nav nav-pills mb-2 mt-2 ms-2">
+                            <h2 className="nav-item" style={{marginTop:"-11px"}}>
+                                <a href="/home" className="nav-link">Athenaeum</a>
+                            </h2>
+                            <li className="nav-item nav-link">
+                                <Link to={"/home"} style={{textDecoration: 'none'}}>
+                                    Home
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <a href="/search" className="nav-link ">Search</a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="/profile" className="nav-link active">Profile</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div className="col-5 mt-1 wd-searchbar" align="center">
+                        <SearchBarComponent/>
+                    </div>
+                    <div className="col-2">
+                        <ul className="nav nav-pills mb-2 mt-2 ms-3">
+                            <li className="nav-item">
+                                <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 {/*TODO: Extra: Link back to search results, maybe use state to keep search term?*/}
                 <Link to={"/search"}>
                     <i className="fa-solid fa-lg fa-arrow-left"></i>
@@ -213,6 +278,37 @@ const ModeratorDetailsComponent = () => {
         
     return (
         <div>
+            <div className="row">
+                <div className="col-6">
+                    <ul className="nav nav-pills mb-2 mt-2 ms-2">
+                        <h2 className="nav-item" style={{marginTop:"-11px"}}>
+                            <a href="/home" className="nav-link">Athenaeum</a>
+                        </h2>
+                        <li className="nav-item nav-link">
+                            <Link to={"/home"} style={{textDecoration: 'none'}}>
+                                Home
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/search" className="nav-link ">Search</a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/profile" className="nav-link active">Profile</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div className="col-5 mt-1 wd-searchbar" align="center">
+                    <SearchBarComponent/>
+                </div>
+                <div className="col-2">
+                    <ul className="nav nav-pills mb-2 mt-2 ms-3">
+                        <li className="nav-item">
+                            <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             {/*TODO: Extra: Link back to search results, maybe use state to keep search term?*/}
             <Link to={"/search"}>
                 <i className="fa-solid fa-lg fa-arrow-left"></i>
@@ -298,6 +394,34 @@ const LoggedOutDetailsComponent = () => {
             
     return (
         <div>
+            <div className="row d-flex justify-content-between">
+                <div className="col-6">
+                    <ul className="nav nav-pills mb-2 mt-2 ms-2">
+                        <h2 className="nav-item" style={{marginTop:"-11px"}}>
+                            <a href="/home" className="nav-link">Athenaeum</a>
+                        </h2>
+                        <li className="nav-item">
+                            <a href="/home" className="nav-link ">Home</a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/search" className="nav-link active">Search</a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/profile" className="nav-link">Profile</a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="col-3">
+                    <ul className="nav nav-pills mb-2 mt-2 ms-5">
+                        <li className="nav-item">
+                            <a href="/login" className="nav-link">Login</a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/register" className="nav-link">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             {/*TODO: Extra: Link back to search results, maybe use state to keep search term?*/}
             <Link to={"/search"}>
                 <i className="fa-solid fa-lg fa-arrow-left"></i>
