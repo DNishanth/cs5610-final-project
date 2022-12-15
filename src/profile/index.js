@@ -35,7 +35,7 @@ const ProfileComponent = () => {
                 </div>
                 <div className="col-2">
                     <ul className="nav nav-pills mb-2 mt-2 ms-3">
-                    <li className="nav-item">
+                        <li className="nav-item">
                             <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>
                         </li>
                     </ul>
