@@ -9,10 +9,9 @@ const DetailsComponent = () => {
     const {pathname} = useLocation();
     const workID = pathname.split('/')[2];
     const {bookDetails} = useSelector((state) => state.details);
-    const {reviews} = useSelector((state) => state.reviews);
+    const {reviews, error} = useSelector((state) => state.reviews);
     const [reviewText, setReviewText] = useState();
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(findBookByWorkIDThunk(workID));
         dispatch(getReviewsByWorkIDThunk(workID));
@@ -46,6 +45,8 @@ const DetailsComponent = () => {
                 </div>
             }
             <br/>
+            {error && <div>{error}</div>}
+            {/*TODO: make showing the error a toast/notification?*/}
             <div className="form-group">
                 <label htmlFor="wd-review-input">Write a review</label>
                 <textarea className="form-control" id="wd-review-input" rows="4"
@@ -61,7 +62,9 @@ const DetailsComponent = () => {
                 {/*TODO: Is reviews true check needed? add key*/}
                 {reviews && reviews.map(review => (
                     <li key={review._id} className="list-group-item">
-                        {review.reviewText}
+                        <Link to={"/profile/" + review.reviewer}>
+                            {review.reviewText}
+                        </Link>
                     </li>
                 ))}
             </div>
