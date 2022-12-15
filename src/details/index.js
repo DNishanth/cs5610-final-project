@@ -8,11 +8,11 @@ import './index.css'
 
 
 const DetailsComponent = () => {
-    const {currentUser} = useSelector((state) => state.users);
     const {pathname} = useLocation();
     const workID = pathname.split('/')[2];
     const {bookDetails} = useSelector((state) => state.details);
     const {reviews, error} = useSelector((state) => state.reviews);
+    const {currentUser} = useSelector((state) => state.users);
     const [reviewText, setReviewText] = useState();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -24,7 +24,13 @@ const DetailsComponent = () => {
     const postReviewHandler = () => {
         if (reviewText.trim()) {
             dispatch(postReviewThunk({workID, reviewText}));
+            dispatch(getReviewsByWorkIDThunk(workID));
         }
+    }
+
+    function formatRole(role) {
+        const lower = role.toLowerCase()
+        return lower.charAt(0).toUpperCase() + lower.slice(1);
     }
 
     return (
@@ -61,25 +67,18 @@ const DetailsComponent = () => {
                     onClick={postReviewHandler}>
                 Post
             </button>
-            <br/><br/><br/>
-            <p>Past Reviews:</p>
-            <div className="wd-review-box">
+            <ul className="list-group">
                 {/*TODO: Is reviews true check needed? add key*/}
                 {reviews && reviews.map(review => (
                     <li key={review._id} className="list-group-item">
-                        <span>
-                            <div>
-                                <Link to={"/profile/" + review.reviewer} className="wd-review-username">
-                                    <b>{currentUser.username}</b>:
-                                </Link>
-                            </div>
-                            &nbsp;&nbsp;&nbsp;
-                            {review.reviewText}
-                            <hr></hr>
-                        </span>
+                        <Link to={"/profile/" + review.reviewer._id}>
+                            {review.reviewer.firstName}
+                        </Link>
+                        <div className={"float-end"}>{formatRole(review.reviewer.role)}</div>
+                        <div>{review.reviewText}</div>
                     </li>
                 ))}
-            </div>
+            </ul>
         </div>
     )}
 export default DetailsComponent;

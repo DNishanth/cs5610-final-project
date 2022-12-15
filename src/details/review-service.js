@@ -6,12 +6,15 @@ const credentialAPI = axios.create({withCredentials: true});
 
 export const postReview = async (review) => {
     const response = await credentialAPI.post(`${REVIEW_API_BASE}`, review);
-    console.log(response);
     return response.data;
 }
 
 export const getReviewsByWorkID = async (workID) => {
     const response = await axios.get(`${BOOK_REVIEWS_API_BASE}/${workID}/reviews`);
-    console.log(response);
+    return response.data;
+}
+
+export const getReviewsByUserID = async (userID) => {
+    const response = await axios.get(`${REVIEW_API_BASE}/${userID}/reviews`);
     return response.data;
 }

@@ -13,3 +13,7 @@
     padding-bottom: 0px;
     margin-bottom: 40px;
 }
+
+.cap-first-letter {
+    text-transform:capitalize;
+}
