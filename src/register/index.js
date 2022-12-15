@@ -12,6 +12,7 @@ const RegisterComponent = () => {
     const [password, setPassword] = useState();
     const [phone, setPhone] = useState();
     const [email, setEmail] = useState();
+    const [role, setRole] = useState('READER');
     const dispatch = useDispatch();
     const {currentUser, error} = useSelector((state) => state.users);
     // TODO: Add role selection for
@@ -26,7 +27,7 @@ const RegisterComponent = () => {
 
     const registerUser = () => {
         if (validFields()) {
-            dispatch(registerThunk({firstName, lastName, username, password, phone, email}));
+            dispatch(registerThunk({firstName, lastName, username, password, phone, email,role}));
         }
     }
 
@@ -67,20 +68,11 @@ const RegisterComponent = () => {
                 <input type="text" className="form-control w-25 mb-5" id="email" placeholder="Enter your email"
                        onChange={(e) => setEmail(e.target.value)}></input>
                 <p>Register as:</p>
-                <div className="wd-radio-buttons" align="center">
-                    <div style={{display: "flex"}}>
-                        <input type="radio" id="readerReg" name="registerUser" value="reader" className="me-2"></input><br/>
-                        <label for="readerReg" className="me-5">Reader</label><br></br>
-                    </div>
-                    <div style={{display: "flex"}}>
-                        <input type="radio" id="authorReg" name="registerUser" value="author" className="me-2"></input><br/>
-                        <label for="authorReg" className="me-5">Author</label><br></br>
-                    </div>
-                    <div style={{display: "flex"}}>
-                        <input type="radio" id="moderatorReg" name="registerUser" value="moderator" className="me-2"></input><br/>
-                        <label for="moderatorReg">Moderator</label><br></br>
-                    </div>
-                </div>
+                <select defaultValue={"READER"} onChange={event => setRole(event.target.value)}>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="MODERATOR">MODERATOR</option>
+                    <option value="READER">READER</option>
+                </select>
                 {/* if filled out correctly - created user and goes to logged-in home page */}
                 {/* If not filled out correctly - error message to user and stay on register page, don't create user */}
                 {/* Change back to /home after testing*/}
