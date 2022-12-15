@@ -1,8 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {postReviewThunk, getReviewsByWorkIDThunk} from "./review-thunks";
+import {postReviewThunk, getReviewsByWorkIDThunk, getReviewsByUserIDThunk} from "./review-thunks";
 
 const initialState = {
     reviews: [],
+    user_reviews: [],
     error: null
 }
 
@@ -11,7 +12,7 @@ const reviewsReducer = createSlice({
     initialState: initialState,
     extraReducers: {
         [postReviewThunk.fulfilled]: (state, action) => {
-            state.reviews.push(action.payload);
+            // state.reviews.push(action.payload);
         },
         [postReviewThunk.pending]: (state, action) => {
             state.error = null;
@@ -21,6 +22,9 @@ const reviewsReducer = createSlice({
         },
         [getReviewsByWorkIDThunk.fulfilled]: (state, action) => {
             state.reviews = action.payload;
+        },
+        [getReviewsByUserIDThunk.fulfilled]: (state, action) => {
+            state.user_reviews = action.payload;
         }
     }
 })

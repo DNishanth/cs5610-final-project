@@ -10,6 +10,7 @@ const DetailsComponent = () => {
     const workID = pathname.split('/')[2];
     const {bookDetails} = useSelector((state) => state.details);
     const {reviews, error} = useSelector((state) => state.reviews);
+    const {currentUser} = useSelector((state) => state.users);
     const [reviewText, setReviewText] = useState();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -21,7 +22,13 @@ const DetailsComponent = () => {
     const postReviewHandler = () => {
         if (reviewText.trim()) {
             dispatch(postReviewThunk({workID, reviewText}));
+            dispatch(getReviewsByWorkIDThunk(workID));
         }
+    }
+
+    function formatRole(role) {
+        const lower = role.toLowerCase()
+        return lower.charAt(0).toUpperCase() + lower.slice(1);
     }
 
     return (
@@ -58,16 +65,18 @@ const DetailsComponent = () => {
                     onClick={postReviewHandler}>
                 Post
             </button>
-            <div>
+            <ul className="list-group">
                 {/*TODO: Is reviews true check needed? add key*/}
                 {reviews && reviews.map(review => (
                     <li key={review._id} className="list-group-item">
-                        <Link to={"/profile/" + review.reviewer}>
-                            {review.reviewText}
+                        <Link to={"/profile/" + review.reviewer._id}>
+                            {review.reviewer.firstName}
                         </Link>
+                        <div className={"float-end"}>{formatRole(review.reviewer.role)}</div>
+                        <div>{review.reviewText}</div>
                     </li>
                 ))}
-            </div>
+            </ul>
         </div>
     )}
 export default DetailsComponent;

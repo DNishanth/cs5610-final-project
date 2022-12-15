@@ -4,6 +4,8 @@ import "./index.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {logoutThunk} from "../login/user-thunks";
+import {useEffect} from "react";
+import {getReviewsByUserIDThunk} from "../details/review-thunks";
 
 // NOT logged in home screen
 const LoggedOutHomeComponent = () => {
@@ -74,7 +76,11 @@ const LoggedOutHomeComponent = () => {
 
 const LoggedInHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
+    const {user_reviews} = useSelector((state) => state.reviews);
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getReviewsByUserIDThunk(currentUser._id));
+    }, []);
     console.log(currentUser);
     return (
         <div className="wd-homepage">
@@ -117,6 +123,17 @@ const LoggedInHomeComponent = () => {
                     <h2 className="wd-about-heading" align="left">View Your Follows:</h2>
                     <br/><br/>
                     <h2 className="wd-about-heading" align="left">View Your Reviews:</h2>
+                    <ul className="list-group">
+                        {/*Slice limits the reviews displayed*/}
+                        {user_reviews && user_reviews.slice(0, 5).map(review => (
+                            <li key={review._id} className="list-group-item">
+                                <Link to={"/details/" + review.workID}>
+                                    Go to review
+                                </Link>
+                                <div>{review.reviewText}</div>
+                            </li>
+                        ))}
+                    </ul>
                     <br/><br/>
                     <h2 className="wd-about-heading" align="left">See the latest from our users:</h2>
 
