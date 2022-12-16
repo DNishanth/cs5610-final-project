@@ -94,7 +94,7 @@ const ProfileComponent = () => {
                         </li>
                     ))}
                 </ul>
-
+                <br/><br/>
                 <ul className="list-group wd-reviews-list">
                     <div>Your followers:</div>
                     {followers && followers.map(follow => (
@@ -106,11 +106,11 @@ const ProfileComponent = () => {
                         </li>
                     ))}
                 </ul>
-
+                <br/><br/>
                 <ul className="list-group wd-reviews-list">
-                    <div>Your reviews:</div>
+                    <div>Your reviews:</div><br/>
                     {user_reviews && user_reviews.slice(0, 5).map(review => (
-                        <li key={review._id} className="list-group-item">
+                        <li key={review._id} className="list-group-item wd-profile-reviews">
                             <div>{review.reviewText}</div>
                             <Link to={"/details/" + review.workID} className="wd-review-link">
                                 Go to review <i className="fa-solid fa-chevron-right"></i>
