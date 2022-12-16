@@ -9,9 +9,9 @@ const ProfileComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
     console.log(currentUser)
     return (
-        <div className="wd-profile-page">
-            <div className="row">
-                <div className="col-6">
+        <div className="container">
+            <div className="row d-flex justify-content-between">
+                <div className="col-5 d-flex justify-content-start">
                     <ul className="nav nav-pills mb-2 mt-2 ms-2">
                         <h2 className="nav-item" style={{marginTop:"-11px"}}>
                             <a href="/home" className="nav-link">Athenaeum</a>
