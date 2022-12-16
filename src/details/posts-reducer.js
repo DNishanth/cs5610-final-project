@@ -26,7 +26,6 @@ const postsReducer = createSlice({
         },
         [getPostsByWorkIDThunk.fulfilled]: (state, action) => {
             state.posts = action.payload;
-            console.log(state.posts)
         },
         [getPostsByUserIDThunk.fulfilled]: (state, action) => {
             state.user_posts = action.payload;

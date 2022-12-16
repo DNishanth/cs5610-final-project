@@ -19,10 +19,9 @@ const ProfileComponent = () => {
         dispatch(getFollowingByUserIDThunk(currentUser._id));
         // dispatch(getFollowersByUserIDThunk(currentUser._id));
     }, []);
-    console.log(currentUser)
 
     function changeInput(ev) {
-        console.log(updateUserInfo)
+        // console.log(updateUserInfo)
         dispatch(updateUserInfo({
             ...currentUser,
             [ev.target.name]: ev.target.value
@@ -72,7 +71,7 @@ const ProfileComponent = () => {
                 </div>}
                 <button className="wd-logout-button" onClick={submitProfile}>Submit Profile Changes</button>
                 <br/><br/>
-                <button className="wd-logout-button" onClick={submitProfile}>Logout</button>
+                <button className="wd-logout-button" onClick={() => dispatch(logoutThunk())}>Logout</button>
                 <br/><br/>
 
                 <ul className="list-group wd-reviews-list">

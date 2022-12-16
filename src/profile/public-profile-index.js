@@ -12,8 +12,14 @@ const PublicProfileComponent = () => {
   const {pathname} = useLocation()
   const param = pathname.split('/')
   const uid = param[param.length-1]
-  const {publicProfile} = useSelector((state) => state.users)
+  const {publicProfile, currentUser} = useSelector((state) => state.users)
   const dispatch = useDispatch()
+
+  const makeFollow = () => {
+    if (currentUser._id !== uid) {
+      dispatch(followUserThunk({followed: uid}));
+    }
+  }
 
   useEffect(() => {
     dispatch(publicProfileThunk(uid))
@@ -77,6 +83,13 @@ const PublicProfileComponent = () => {
                   <br/>
                   <br/>
                 </div>}
+
+            <div>Follow this user to stay up to date on the latest reviews</div>
+            <br/>
+            {currentUser &&
+                <button className="wd-logout-button" onClick={makeFollow}>Follow</button>
+            }
+            <br/><br/>
             <button className="wd-logout-button"
                     onClick={() => dispatch(logoutThunk())}>Logout
             </button>

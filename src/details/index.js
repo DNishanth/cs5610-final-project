@@ -135,7 +135,7 @@ const ReaderDetailsComponent = () => {
             <br/><br/>
             <ul className="list-group">
                 <p>Past Book Discussions:</p>
-                {console.log(posts)}
+                {/*{console.log(posts)}*/}
                 {posts && posts.map(post => (
                     <li key={post._id} className="list-group-item">
                         <Link to={"/profile/" + post.poster._id}>
@@ -176,7 +176,6 @@ const ReaderDetailsComponent = () => {
                 dispatch(postPostThunk({workID, postText}));
                 dispatch(getPostsByWorkIDThunk(workID));
             }
-            console.log('hey')
         }
     
         function formatRole(role) {
@@ -254,7 +253,7 @@ const ReaderDetailsComponent = () => {
                 <br/><br/>
                 <ul className="list-group">
                     <p>Past Book Discussions:</p>
-                    {console.log(posts)}
+                    {/*{console.log(posts)}*/}
                     {posts && posts.map(post => (
                         <li key={post._id} className="list-group-item">
                             <Link to={"/profile/" + post.poster._id}>
@@ -385,7 +384,7 @@ const ModeratorDetailsComponent = () => {
             <br/><br/>
             <ul className="list-group">
                     <p>Past Book Discussions:</p>
-                    {console.log(posts)}
+                    {/*{console.log(posts)}*/}
                     {posts && posts.map(post => (
                         <li key={post._id} className="list-group-item">
                             <Link to={"/profile/" + post.poster._id}>
@@ -487,7 +486,7 @@ const LoggedOutDetailsComponent = () => {
             <br/><br/>
             <ul className="list-group">
                     <p>Past Book Discussions:</p>
-                    {console.log(posts)}
+                    {/*{console.log(posts)}*/}
                     {posts && posts.map(post => (
                         <li key={post._id} className="list-group-item">
                             <Link to={"/profile/" + post.poster._id}>
