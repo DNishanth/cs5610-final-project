@@ -126,9 +126,6 @@ const ReaderDetailsComponent = () => {
                 <p>Past Book Discussions:</p>
             </ul>
             <br/><br/>
-            <ul className="list-group">
-                <p>Moderators' Notes:</p>
-            </ul>
         </div>
     )}
 
@@ -244,9 +241,6 @@ const ReaderDetailsComponent = () => {
                     ))}
                 </ul>
                 <br/><br/>
-                <ul className="list-group">
-                    <p>Moderators' Notes</p>
-                </ul>
             </div>
         )}
 
@@ -444,9 +438,6 @@ const LoggedOutDetailsComponent = () => {
                 ))}
             </ul>
             <br/><br/>
-            <ul className="list-group">
-                <p>Moderators' Notes:</p>
-            </ul>
         </div>
     )}
 
