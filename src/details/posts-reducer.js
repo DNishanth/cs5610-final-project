@@ -1,10 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {postPostThunk, getPostsByWorkIDThunk, getPostsByUserIDThunk, deletePostThunk} from "./post-thunks";
+import {postPostThunk, getPostsByWorkIDThunk, getPostsByUserIDThunk, deletePostThunk, getPostsThunk} from "./post-thunks";
 
 const initialState = {
     posts: [],
     user_posts: [],
-    error: null
+    error: null,
+    recent_posts: []
 }
 
 const postsReducer = createSlice({
@@ -19,6 +20,9 @@ const postsReducer = createSlice({
         },
         [postPostThunk.rejected]: (state, action) => {
             state.error = "You must be logged in to create a discussion post"
+        },
+        [getPostsThunk.fulfilled]: (state, action) => {
+            state.recent_posts = action.payload;
         },
         [getPostsByWorkIDThunk.fulfilled]: (state, action) => {
             state.posts = action.payload;
