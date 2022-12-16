@@ -24,6 +24,11 @@ export const getProfile = async () => {
     return response.data;
 }
 
+export const updateProfile = async (user) => {
+    const response = await credentialAPI.post(`${API_BASE}/updateProfile`, user);
+    return response.data;
+}
+
 
 export const findUserById = async (uid) => {
     console.log("inside service",uid)
