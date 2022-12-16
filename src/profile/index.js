@@ -70,7 +70,9 @@ const ProfileComponent = () => {
                     <br/>
                     <br/>
                 </div>}
-                <button className="wd-logout-button" onClick={submitProfile}>Submit</button>
+                <button className="wd-logout-button" onClick={submitProfile}>Submit Profile Changes</button>
+                <br/><br/>
+                <button className="wd-logout-button" onClick={submitProfile}>Logout</button>
                 <br/><br/>
 
                 <ul className="list-group wd-reviews-list">
@@ -122,7 +124,7 @@ function Header() {
         dispatch(logoutThunk())
     }
     return <div className="row">
-        <div className="col-6">
+        <div className="col-5 d-flex justify-content-start">
             <ul className="nav nav-pills mb-2 mt-2 ms-2">
                 <h2 className="nav-item" style={{marginTop:"-11px"}}>
                     <a href="/home" className="nav-link">Athenaeum</a>
@@ -133,8 +135,8 @@ function Header() {
                 <li className="nav-item">
                     <a href="/search" className="nav-link ">Search</a>
                 </li>
-                <li className="nav-item nav-link ">
-                    <Link to={"/profile"} style={{textDecoration: "none"}} className='active'>
+                <li className="nav-item">
+                    <Link to={"/profile"} style={{textDecoration: "none"}} className="nav-link active">
                         Profile
                     </Link>
                 </li>
@@ -146,12 +148,9 @@ function Header() {
         </div>
         <div className="col-2">
             <ul className="nav nav-pills mb-2 mt-2 ms-5">
-                {currentUser && currentUser.username ? <li><a href="/profile">{currentUser.username}</a></li> : <li className="nav-item">
-                    <a href="/login" className="nav-link">Login</a>
-                </li>}
-                {currentUser && currentUser.username ? <li><button className="btn-outline" onClick={loginOut}>login out</button></li> : <li className="nav-item">
-                    <a href="/register" className="nav-link">Register</a>
-                </li>}
+                <li className="nav-item">
+                    <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>
+                </li>
             </ul>
         </div>
     </div>
