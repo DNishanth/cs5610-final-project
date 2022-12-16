@@ -69,7 +69,7 @@ const RegisterComponent = () => {
                        onChange={(e) => setEmail(e.target.value)}></input>
                 <p>Register as:</p>
                 <select defaultValue={"READER"} onChange={event => setRole(event.target.value)}>
-                    <option value="ADMIN">ADMIN</option>
+                    <option value="AUTHOR">AUTHOR</option>
                     <option value="MODERATOR">MODERATOR</option>
                     <option value="READER">READER</option>
                 </select>
