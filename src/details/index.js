@@ -126,9 +126,6 @@ const ReaderDetailsComponent = () => {
                 <p>Past Book Discussions:</p>
             </ul>
             <br/><br/>
-            <ul className="list-group">
-                <p>Moderators' Notes:</p>
-            </ul>
         </div>
     )}
 
@@ -244,9 +241,6 @@ const ReaderDetailsComponent = () => {
                     ))}
                 </ul>
                 <br/><br/>
-                <ul className="list-group">
-                    <p>Moderators' Notes</p>
-                </ul>
             </div>
         )}
 
@@ -264,10 +258,9 @@ const ModeratorDetailsComponent = () => {
     }, []);
     // TODO: check deps needed, most likely empty if this runs once
         
-    const postReviewHandler = () => {
+    const deleteReviewHandler = () => {
         if (reviewText.trim()) {
-            dispatch(postReviewThunk({workID, reviewText}));
-            dispatch(getReviewsByWorkIDThunk(workID));
+            dispatch(deleteReviewThunk({workID}));
         }
     }
         
@@ -326,21 +319,7 @@ const ModeratorDetailsComponent = () => {
                     <div>{bookDetails.description.value}</div>}
                 </div>
             }
-            <br/>
             {error && <div>{error}</div>}
-            
-            {/*TODO: make showing the error a toast/notification?*/}
-            <div className="form-group">
-                <label htmlFor="wd-review-input">Moderator's Note:</label>
-                <textarea className="form-control" id="wd-review-input" rows="4"
-                    onChange={(e) => setReviewText(e.target.value)}>
-                </textarea>
-                {/*TODO: add text/current user*/}
-            </div>
-            <button type="button" className="btn btn-success"
-                onClick={postReviewHandler}>
-                Post
-            </button>
             <br/><br/>
             <ul className="list-group">
                 <p>Past Reviews:</p>
@@ -352,6 +331,7 @@ const ModeratorDetailsComponent = () => {
                         </Link>
                         <div className={"float-end"}>{formatRole(review.reviewer.role)}</div>
                         <div>{review.reviewText}</div>
+                        <button className="wd-mod-delete-button" onClick={() => dispatch(deleteReviewThunk(review._id))}>Delete</button>
                     </li>
                 ))}
             </ul>
@@ -360,9 +340,6 @@ const ModeratorDetailsComponent = () => {
                 <p>Past Book Discussions:</p>
             </ul>
             <br/><br/>
-            <ul className="list-group">
-                <p>Moderators' Notes:</p>
-            </ul>
         </div>
     )}
 
@@ -461,9 +438,6 @@ const LoggedOutDetailsComponent = () => {
                 ))}
             </ul>
             <br/><br/>
-            <ul className="list-group">
-                <p>Moderators' Notes:</p>
-            </ul>
         </div>
     )}
 
