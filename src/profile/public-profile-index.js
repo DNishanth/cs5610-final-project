@@ -81,9 +81,9 @@ const PublicProfileComponent = () => {
             <div>Follow this user to stay up to date on the latest reviews</div>
             <br/>
             {currentUser &&
-                <button onClick={() => dispatch(followUserThunk({followed: uid}))}>Follow</button>
+                <button className="wd-logout-button" onClick={() => dispatch(followUserThunk({followed: uid}))}>Follow</button>
             }
-            <br/>
+            <br/><br/>
             <button className="wd-logout-button"
                     onClick={() => dispatch(logoutThunk())}>Logout
             </button>
