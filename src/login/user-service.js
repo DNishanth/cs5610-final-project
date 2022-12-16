@@ -23,3 +23,13 @@ export const getProfile = async () => {
     const response = await credentialAPI.get(`${API_BASE}/profile`);
     return response.data;
 }
+
+
+export const findUserById = async (uid) => {
+    console.log("inside service",uid)
+    const response = await credentialAPI.get(`${API_BASE}/register/${uid}`);
+    const user = response.data
+    console.log("Data:",user)
+    return user
+}
+

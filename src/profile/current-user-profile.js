@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import React, {useEffect} from "react";
-import {profileThunk} from "../login/user-thunks";
+import {profileThunk, publicProfileThunk} from "../login/user-thunks";
 
 const CurrentUserProfile = ({children}) => {
     const dispatch = useDispatch()
