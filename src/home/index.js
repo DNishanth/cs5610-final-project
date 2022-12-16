@@ -11,7 +11,13 @@ import { getPostsByUserIDThunk } from "../details/post-thunks";
 // NOT logged in home screen
 const LoggedOutHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
+    const {recent_reviews} = useSelector((state) => state.reviews);
     console.log(currentUser);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getReviewsThunk());
+        // dispatch(getFollowersByUserIDThunk(currentUser._id));
+    }, []);
     return (
         <div className="container">
             <div className="row d-flex">
@@ -72,6 +78,17 @@ const LoggedOutHomeComponent = () => {
                     <div className="wd-about-content" align="left">
                         <p>Search our online library for your favorite literary works!</p>
                     </div>
+                    <ul className="list-group wd-reviews-list">
+                        <div className="wd-trending-heading">Trending Reviews</div><br/>
+                        {recent_reviews && recent_reviews.slice(0, 3).map(review => (
+                            <li key={review._id} className="list-group-item wd-profile-reviews">
+                                <div>{review.reviewText}</div>
+                                <Link to={"/details/" + review.workID} className="wd-review-link">
+                                    Go to review <i className="fa-solid fa-chevron-right"></i>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
             </div>
@@ -127,7 +144,7 @@ const ReaderHomeComponent = () => {
                 <div className="col-10" align="center">
                     <h1>Welcome back to Athenaeum, {currentUser.username}!</h1>
                     <br/><br/>
-                    <h2 className="wd-about-heading" align="left">See the Latest Reviews:</h2>
+                    <h2 className="wd-about-heading" align="left">See Your Latest Reviews:</h2>
                     <ul className="list-group wd-reviews-list">
                         {/*Slice limits the reviews displayed*/}
                         {user_reviews && user_reviews.slice(0, 5).map(review => (
@@ -207,7 +224,7 @@ const AuthorHomeComponent = () => {
                     <br/>
                     <h2 className="wd-about-heading" align="left">View Recent Discussion Posts:</h2>
                     <br/><br/>
-                    <h2 className="wd-about-heading" align="left">See the Latest Reviews:</h2>
+                    <h2 className="wd-about-heading" align="left">See Your latest Reviews:</h2>
                     <ul className="list-group wd-reviews-list">
                         {/*Slice limits the reviews displayed*/}
                         {user_reviews && user_reviews.slice(0, 5).map(review => (
@@ -215,7 +232,7 @@ const AuthorHomeComponent = () => {
                                 <div>{review.reviewText}</div>
                                 <Link to={"/details/" + review.workID} className="wd-review-link">
                                     Go to review <i class="fa-solid fa-chevron-right"></i>
-                                </Link>   
+                                </Link>
                             </li>
                         ))}
                     </ul>

@@ -94,9 +94,10 @@ const ReaderDetailsComponent = () => {
                      {("covers" in bookDetails) &&
                          <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
                      <br/>
-
-                    {typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
-                        <div>{bookDetails.description.value}</div>}
+                    {bookDetails['description'] ?
+                        typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
+                                <div>{bookDetails.description.value}</div>
+                        : <div>No description is available</div> }
                 </div>
             }
             <br/>
@@ -229,9 +230,11 @@ const ReaderDetailsComponent = () => {
                          {("covers" in bookDetails) &&
                              <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
                          <br/>
-    
-                        {typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
-                            <div>{bookDetails.description.value}</div>}
+
+                        {bookDetails['description'] ?
+                            typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
+                                <div>{bookDetails.description.value}</div>
+                            : <div>No description is available</div> }
                     </div>
                 }
                 <br/>
@@ -357,8 +360,10 @@ const ModeratorDetailsComponent = () => {
                     {("covers" in bookDetails) &&
                         <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
                     <br/>
-                    {typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
-                    <div>{bookDetails.description.value}</div>}
+                    {bookDetails['description'] ?
+                        typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
+                            <div>{bookDetails.description.value}</div>
+                        : <div>No description is available</div> }
                 </div>
             }
             {error && <div>{error}</div>}
@@ -467,9 +472,11 @@ const LoggedOutDetailsComponent = () => {
                         {("covers" in bookDetails) &&
                             <img src={"https://covers.openlibrary.org/b/id/" + bookDetails.covers[0] + "-L.jpg"}/>}
                         <br/>
-            
-                        {typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
-                            <div>{bookDetails.description.value}</div>}
+
+                        {bookDetails['description'] ?
+                            typeof bookDetails['description'] === 'string' ? <div>{bookDetails['description']}</div> :
+                                <div>{bookDetails.description.value}</div>
+                            : <div>No description is available</div> }
                     </div>
             }
             <br/>
