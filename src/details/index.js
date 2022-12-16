@@ -337,7 +337,7 @@ const ModeratorDetailsComponent = () => {
                         </Link>
                         <div className={"float-end"}>{formatRole(review.reviewer.role)}</div>
                         <div>{review.reviewText}</div>
-                        <button className="wd-mod-delete-button" onClick={() => dispatch(deleteReviewHandler())}>Delete</button>
+                        <button className="wd-mod-delete-button" onClick={() => dispatch(deleteReviewThunk(review._id))}>Delete</button>
                     </li>
                 ))}
             </ul>
