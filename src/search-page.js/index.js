@@ -6,9 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 
 const LoggedOutSearchPageComponent = () => 
 
-    <div className="wd-search-page">
+    <div className="container">
         <div className="row d-flex justify-content-between">
-            <div className="col-6">
+            <div className="col-5 d-flex justify-content-start">
                 <ul className="nav nav-pills mb-2 mt-2 ms-2">
                     <h2 className="nav-item" style={{marginTop:"-11px"}}>
                         <a href="/home" className="nav-link">Athenaeum</a>
@@ -24,7 +24,7 @@ const LoggedOutSearchPageComponent = () =>
                     </li>
                 </ul>
             </div>
-            <div className="col-3">
+            <div className="col-2">
                 <ul className="nav nav-pills mb-2 mt-2 ms-5">
                     <li className="nav-item">
                         <a href="/login" className="nav-link">Login</a>
@@ -46,9 +46,9 @@ const LoggedInSearchPageComponent = () => {
     const dispatch = useDispatch();
     const {currentUser} = useSelector((state) => state.users);
     return (
-        <div className="wd-search-page">
+        <div className="container">
             <div className="row d-flex justify-content-between">
-                <div className="col-6">
+                <div className="col-5 d-flex justify-content-start">
                     <ul className="nav nav-pills mb-2 mt-2 ms-2">
                         <h2 className="nav-item" style={{marginTop:"-11px"}}>
                             <a href="/home" className="nav-link">Athenaeum</a>
@@ -64,7 +64,7 @@ const LoggedInSearchPageComponent = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <ul className="nav nav-pills mb-2 mt-2 ms-5">
                         <li className="nav-item">
                                 <a href="/home" className="nav-link" onClick={() => dispatch(logoutThunk())}>Logout</a>

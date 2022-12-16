@@ -15,9 +15,14 @@ const followsReducer = createSlice({
         },
         [getFollowersByUserIDThunk.fulfilled]: (state, action) => {
             state.followers = action.payload;
+            console.log("Setting followers in reducer")
+            console.log(state.followers)
+            // console.log(state.followers)
         },
         [getFollowingByUserIDThunk.fulfilled]: (state, action) => {
             state.following = action.payload;
+            console.log("Setting followed in reducer")
+            console.log(state.following)
         }
     }
 })
