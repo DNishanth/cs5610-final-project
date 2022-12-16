@@ -80,8 +80,9 @@ const LoggedOutHomeComponent = () => {
                     <div className="wd-about-content" align="left">
                         <p>Search our online library for your favorite literary works!</p>
                     </div>
+                    <br/>
+                    <h2 className="wd-about-heading" align="left">Trending Reviews:</h2>
                     <ul className="list-group wd-reviews-list">
-                        <div className="wd-trending-heading">Trending Reviews:</div><br/>
                         {recent_reviews && recent_reviews.slice(0, 3).map(review => (
                             <li key={review._id} className="list-group-item wd-profile-reviews">
                                 <div>{review.reviewText}</div>
@@ -92,8 +93,8 @@ const LoggedOutHomeComponent = () => {
                         ))}
                     </ul>
                     <br/><br/>
+                    <h2 className="wd-about-heading" align="left">Trending Discussion Posts:</h2>
                     <ul className="list-group wd-reviews-list">
-                        <div className="wd-trending-heading">Trending Discussion Posts:</div><br/>
                         {recent_posts && recent_posts.slice(0, 3).map(post => (
                             <li key={post._id} className="list-group-item wd-profile-reviews">
                                 <div>{post.postText}</div>
@@ -113,11 +114,11 @@ const LoggedOutHomeComponent = () => {
 const ReaderHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
     const {user_reviews} = useSelector((state) => state.reviews);
-    const {user_posts} = useSelector((state) => state.posts);
+    const {recent_posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getReviewsByUserIDThunk(currentUser._id));
-        dispatch(getPostsByUserIDThunk(currentUser._id));
+        dispatch(getPostsThunk());
     }, []);
     console.log(currentUser);
     return (
@@ -171,15 +172,14 @@ const ReaderHomeComponent = () => {
                         ))}
                     </ul>
                     <br/><br/>
-                    <h2 className="wd-about-heading" align="left">View Recent Discussion Posts:</h2>
+                    <h2 className="wd-about-heading" align="left">Trending Discussion Posts:</h2>
                     <ul className="list-group wd-reviews-list">
-                        {/*Slice limits the reviews displayed*/}
-                        {user_posts && user_posts.slice(0, 5).map(post => (
-                            <li key={post._id} className="list-group-item">
+                        {recent_posts && recent_posts.slice(0, 3).map(post => (
+                            <li key={post._id} className="list-group-item wd-profile-reviews">
                                 <div>{post.postText}</div>
                                 <Link to={"/details/" + post.workID} className="wd-review-link">
-                                    Go to post <i class="fa-solid fa-chevron-right"></i>
-                                </Link>   
+                                    Go to post <i className="fa-solid fa-chevron-right"></i>
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -193,9 +193,11 @@ const ReaderHomeComponent = () => {
 const AuthorHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
     const {user_reviews} = useSelector((state) => state.reviews);
+    const {user_posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getReviewsByUserIDThunk(currentUser._id));
+        dispatch(getReviewsThunk());
+        dispatch(getPostsByUserIDThunk(currentUser._id));
     }, []);
     console.log(currentUser);
     return (
@@ -234,11 +236,8 @@ const AuthorHomeComponent = () => {
             <br/><br/>
             <div className="row">
                 <div className="col-10" align="center">
-                    <h1>Welcome back to Athenaeum, {currentUser.username}!</h1>
-                    <br/>
-                    <h2 className="wd-about-heading" align="left">View Recent Discussion Posts:</h2>
-                    <br/><br/>
-                    <h2 className="wd-about-heading" align="left">See Your latest Reviews:</h2>
+                    <h1>Welcome back to Athenaeum, {currentUser.username}!</h1><br/><br/>
+                    <h2 className="wd-about-heading" align="left">Trending Reviews:</h2>
                     <ul className="list-group wd-reviews-list">
                         {/*Slice limits the reviews displayed*/}
                         {user_reviews && user_reviews.slice(0, 5).map(review => (
@@ -247,6 +246,19 @@ const AuthorHomeComponent = () => {
                                 <Link to={"/details/" + review.workID} className="wd-review-link">
                                     Go to review <i class="fa-solid fa-chevron-right"></i>
                                 </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <br/><br/>
+                    <h2 className="wd-about-heading" align="left">View your recent Discussion Posts:</h2>
+                    <ul className="list-group wd-reviews-list">
+                        {/*Slice limits the reviews displayed*/}
+                        {user_posts && user_posts.slice(0, 5).map(post => (
+                            <li key={post._id} className="list-group-item">
+                                <div>{post.postText}</div>
+                                <Link to={"/details/" + post.workID} className="wd-review-link">
+                                    Go to post <i class="fa-solid fa-chevron-right"></i>
+                                </Link>   
                             </li>
                         ))}
                     </ul>
@@ -260,10 +272,12 @@ const AuthorHomeComponent = () => {
 
 const ModeratorHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
-    const {user_reviews} = useSelector((state) => state.reviews);
+    const {recent_reviews} = useSelector((state) => state.reviews);
+    const {recent_posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getReviewsByUserIDThunk(currentUser._id));
+        dispatch(getReviewsThunk());
+        dispatch(getPostsThunk());
     }, []);
     console.log(currentUser);
     return (
@@ -309,6 +323,29 @@ const ModeratorHomeComponent = () => {
                     <p className="wd-about-content" align="left">As a moderator, you have the power to check on our readers' reviews, as well as our authors' discussion posts.</p>
                     <p className="wd-about-content" align="left">If you feel that any reviews are not productive, you may delete them from a book's details page.</p>
                     <br/><br/>
+                    <h2 className="wd-about-heading" align="left">Trending Reviews:</h2>
+                    <ul className="list-group wd-reviews-list">
+                        {recent_reviews && recent_reviews.slice(0, 3).map(review => (
+                            <li key={review._id} className="list-group-item wd-profile-reviews">
+                                <div>{review.reviewText}</div>
+                                <Link to={"/details/" + review.workID} className="wd-review-link">
+                                    Go to review <i className="fa-solid fa-chevron-right"></i>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <br/><br/>
+                    <h2 className="wd-about-heading" align="left">Trending Discussion Posts:</h2>
+                    <ul className="list-group wd-reviews-list">
+                        {recent_posts && recent_posts.slice(0, 3).map(post => (
+                            <li key={post._id} className="list-group-item wd-profile-reviews">
+                                <div>{post.postText}</div>
+                                <Link to={"/details/" + post.workID} className="wd-review-link">
+                                    Go to post <i className="fa-solid fa-chevron-right"></i>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>
