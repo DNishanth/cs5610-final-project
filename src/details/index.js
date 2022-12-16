@@ -8,6 +8,7 @@ import './index.css'
 import { current } from "@reduxjs/toolkit";
 import {logoutThunk} from "../login/user-thunks";
 import SearchBarComponent from "../search";
+import { postPostThunk, getPostsByWorkIDThunk, deletePostThunk } from "./post-thunks";
 
 
 
@@ -16,12 +17,15 @@ const ReaderDetailsComponent = () => {
     const workID = pathname.split('/')[2];
     const {bookDetails} = useSelector((state) => state.details);
     const {reviews, error} = useSelector((state) => state.reviews);
+    const {posts} = useSelector((state) => state.posts);
     const {currentUser} = useSelector((state) => state.users);
     const [reviewText, setReviewText] = useState();
+    const [postText, setPostText] = useState();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findBookByWorkIDThunk(workID));
         dispatch(getReviewsByWorkIDThunk(workID));
+        dispatch(getPostsByWorkIDThunk(workID));
     }, []);
     // TODO: check deps needed, most likely empty if this runs once
 
@@ -29,6 +33,12 @@ const ReaderDetailsComponent = () => {
         if (reviewText.trim()) {
             dispatch(postReviewThunk({workID, reviewText}));
             dispatch(getReviewsByWorkIDThunk(workID));
+        }
+    }
+    const postPostHandler = () => {
+        if (postText.trim()) {
+            dispatch(postPostThunk({workID, postText}));
+            dispatch(getPostsByWorkIDThunk(workID));
         }
     }
     // TODO: if doesnt work try refresh page
@@ -124,6 +134,20 @@ const ReaderDetailsComponent = () => {
             <br/><br/>
             <ul className="list-group">
                 <p>Past Book Discussions:</p>
+                {console.log(posts)}
+                {posts && posts.map(post => (
+                    <li key={post._id} className="list-group-item">
+                        <Link to={"/profile/" + post.poster._id}>
+                            {post.poster.firstName}
+                        </Link>
+                        <div className="float-end">{formatRole(post.poster.role)}</div>
+                        <div>{post.postText}</div>
+                        {post.poster.role === "MODERATOR" &&
+                            <i className="fa fa-trash float-end" aria-hidden="true"
+                               onClick={() => {dispatch(deletePostThunk(post._id))}}></i>
+                        }
+                    </li>
+                ))}
             </ul>
             <br/><br/>
         </div>
@@ -135,20 +159,23 @@ const ReaderDetailsComponent = () => {
         const workID = pathname.split('/')[2];
         const {bookDetails} = useSelector((state) => state.details);
         const {reviews, error} = useSelector((state) => state.reviews);
+        const {posts} = useSelector((state) => state.posts);
         const {currentUser} = useSelector((state) => state.users);
-        const [reviewText, setReviewText] = useState();
+        const [postText, setPostText] = useState();
         const dispatch = useDispatch();
         useEffect(() => {
             dispatch(findBookByWorkIDThunk(workID));
             dispatch(getReviewsByWorkIDThunk(workID));
+            dispatch(getPostsByWorkIDThunk(workID));
         }, []);
         // TODO: check deps needed, most likely empty if this runs once
     
-        const postReviewHandler = () => {
-            if (reviewText.trim()) {
-                dispatch(postReviewThunk({workID, reviewText}));
-                dispatch(getReviewsByWorkIDThunk(workID));
+        const postPostHandler = () => {
+            if (postText.trim()) {
+                dispatch(postPostThunk({workID, postText}));
+                dispatch(getPostsByWorkIDThunk(workID));
             }
+            console.log('hey')
         }
     
         function formatRole(role) {
@@ -213,18 +240,31 @@ const ReaderDetailsComponent = () => {
                 <div className="form-group">
                     <label htmlFor="wd-review-input">Start your book discussion:</label>
                     <textarea className="form-control" id="wd-review-input" rows="4"
-                              onChange={(e) => setReviewText(e.target.value)}>
+                              onChange={(e) => setPostText(e.target.value)}>
                     </textarea>
                     {/*TODO: add text/current user*/}
                 </div>
                 <button type="button" className="btn btn-success"
-                        onClick={postReviewHandler}>
+                        onClick={postPostHandler}>
                     Post
                 </button>
                 <br/><br/>
                 <ul className="list-group">
                     <p>Past Book Discussions:</p>
-
+                    {console.log(posts)}
+                    {posts && posts.map(post => (
+                        <li key={post._id} className="list-group-item">
+                            <Link to={"/profile/" + post.poster._id}>
+                                {post.poster.firstName}
+                            </Link>
+                            <div className="float-end">{formatRole(post.poster.role)}</div>
+                            <div>{post.postText}</div>
+                            {post.poster.role === "MODERATOR" &&
+                                <i className="fa fa-trash float-end" aria-hidden="true"
+                                onClick={() => {dispatch(deletePostThunk(post._id))}}></i>
+                            }
+                        </li>
+                    ))}
                 </ul>
                 <br/><br/>
                 <ul className="list-group">
@@ -251,10 +291,12 @@ const ModeratorDetailsComponent = () => {
     const {reviews, error} = useSelector((state) => state.reviews);
     const {currentUser} = useSelector((state) => state.users);
     const [reviewText, setReviewText] = useState();
+    const {posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findBookByWorkIDThunk(workID));
         dispatch(getReviewsByWorkIDThunk(workID));
+        dispatch(getPostsByWorkIDThunk(workID));
     }, []);
     // TODO: check deps needed, most likely empty if this runs once
         
@@ -337,8 +379,19 @@ const ModeratorDetailsComponent = () => {
             </ul>
             <br/><br/>
             <ul className="list-group">
-                <p>Past Book Discussions:</p>
-            </ul>
+                    <p>Past Book Discussions:</p>
+                    {console.log(posts)}
+                    {posts && posts.map(post => (
+                        <li key={post._id} className="list-group-item">
+                            <Link to={"/profile/" + post.poster._id}>
+                                {post.poster.firstName}
+                            </Link>
+                            <div className="float-end">{formatRole(post.poster.role)}</div>
+                            <div>{post.postText}</div>
+                            <button className="wd-mod-delete-button" onClick={() => dispatch(deletePostThunk(post._id))}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
             <br/><br/>
         </div>
     )}
@@ -350,10 +403,12 @@ const LoggedOutDetailsComponent = () => {
     const {reviews, error} = useSelector((state) => state.reviews);
     const {currentUser} = useSelector((state) => state.users);
     const [reviewText, setReviewText] = useState();
+    const {posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findBookByWorkIDThunk(workID));
         dispatch(getReviewsByWorkIDThunk(workID));
+        dispatch(getPostsByWorkIDThunk(workID));
     }, []);
     // TODO: check deps needed, most likely empty if this runs once
             
@@ -421,8 +476,22 @@ const LoggedOutDetailsComponent = () => {
             {error && <div>{error}</div>}
             <br/><br/>
             <ul className="list-group">
-                <p>Past Book Discussions:</p>
-            </ul>
+                    <p>Past Book Discussions:</p>
+                    {console.log(posts)}
+                    {posts && posts.map(post => (
+                        <li key={post._id} className="list-group-item">
+                            <Link to={"/profile/" + post.poster._id}>
+                                {post.poster.firstName}
+                            </Link>
+                            <div className="float-end">{formatRole(post.poster.role)}</div>
+                            <div>{post.postText}</div>
+                            {post.poster.role === "MODERATOR" &&
+                                <i className="fa fa-trash float-end" aria-hidden="true"
+                                onClick={() => {dispatch(deletePostThunk(post._id))}}></i>
+                            }
+                        </li>
+                    ))}
+                </ul>
             <br/><br/>
             <ul className="list-group">
                 <p>Past Reviews:</p>

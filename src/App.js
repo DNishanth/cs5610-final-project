@@ -9,6 +9,7 @@ import bookDetailsReducer from "./details/details-reducer";
 import reviewsReducer from "./details/reviews-reducer";
 import usersReducer from "./login/user-reducer"
 import followsReducer from "./profile/follows-reducer";
+import postsReducer from "./details/posts-reducer";
 import DetailsComponent from "./details";
 import LoginComponent from "./login";
 import ProfileComponent from "./profile";
@@ -25,7 +26,8 @@ const store = configureStore({
         details: bookDetailsReducer,
         reviews: reviewsReducer,
         users: usersReducer,
-        follows: followsReducer
+        follows: followsReducer,
+        posts: postsReducer
     }
 })
 

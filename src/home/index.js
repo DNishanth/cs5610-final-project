@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {logoutThunk} from "../login/user-thunks";
 import {useEffect} from "react";
 import {getReviewsByUserIDThunk} from "../details/review-thunks";
+import { getPostsByUserIDThunk } from "../details/post-thunks";
 
 // NOT logged in home screen
 const LoggedOutHomeComponent = () => {
@@ -81,9 +82,11 @@ const LoggedOutHomeComponent = () => {
 const ReaderHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
     const {user_reviews} = useSelector((state) => state.reviews);
+    const {user_posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getReviewsByUserIDThunk(currentUser._id));
+        dispatch(getPostsByUserIDThunk(currentUser._id));
     }, []);
     console.log(currentUser);
     return (
@@ -138,6 +141,17 @@ const ReaderHomeComponent = () => {
                     </ul>
                     <br/><br/>
                     <h2 className="wd-about-heading" align="left">View Recent Discussion Posts:</h2>
+                    <ul className="list-group wd-reviews-list">
+                        {/*Slice limits the reviews displayed*/}
+                        {user_posts && user_posts.slice(0, 5).map(post => (
+                            <li key={post._id} className="list-group-item">
+                                <div>{post.postText}</div>
+                                <Link to={"/details/" + post.workID} className="wd-review-link">
+                                    Go to post <i class="fa-solid fa-chevron-right"></i>
+                                </Link>   
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
             </div>
