@@ -1,10 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {postReviewThunk, getReviewsByWorkIDThunk, getReviewsByUserIDThunk, deleteReviewThunk} from "./review-thunks";
+import {
+    postReviewThunk,
+    getReviewsByWorkIDThunk,
+    getReviewsByUserIDThunk,
+    deleteReviewThunk,
+    getReviewsThunk
+} from "./review-thunks";
 
 const initialState = {
     reviews: [],
     user_reviews: [],
-    error: null
+    error: null,
+    recent_reviews: []
 }
 
 const reviewsReducer = createSlice({
@@ -20,6 +27,9 @@ const reviewsReducer = createSlice({
         [postReviewThunk.rejected]: (state, action) => {
             state.error = "You must be logged in to post a review"
         },
+        [getReviewsThunk.fulfilled]: (state, action) => {
+            state.recent_reviews = action.payload;
+        },
         [getReviewsByWorkIDThunk.fulfilled]: (state, action) => {
             state.reviews = action.payload;
         },
@@ -28,7 +38,7 @@ const reviewsReducer = createSlice({
         },
         [deleteReviewThunk.fulfilled]: (state, action) => {
             state.reviews = state.reviews.filter(review => review._id !== action.payload);
-        },
+        }
     }
 })
 
