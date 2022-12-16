@@ -86,7 +86,7 @@ const ProfileComponent = () => {
                 <ul className="list-group wd-reviews-list">
                     <div>You are following:</div>
                     {following && following.map(follow => (
-                        <li key={follow._id} className="list-group-item">
+                        <li key={follow._id} className="list-group-item wd-profile-reviews">
                             <div>{follow.followed.username}</div>
                             <Link to={"/profile/" + follow.followed._id} className="wd-review-link">
                                 View profile <i className="fa-solid fa-chevron-right"></i>
@@ -98,7 +98,7 @@ const ProfileComponent = () => {
                 <ul className="list-group wd-reviews-list">
                     <div>Your followers:</div>
                     {followers && followers.map(follow => (
-                        <li key={follow._id} className="list-group-item">
+                        <li key={follow._id} className="list-group-item wd-profile-reviews">
                             <div>{follow.follower.username}</div>
                             <Link to={"/profile/" + follow.follower._id} className="wd-review-link">
                                 View profile <i className="fa-solid fa-chevron-right"></i>
