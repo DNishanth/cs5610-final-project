@@ -4,9 +4,9 @@ import {
     logoutThunk,
     profileThunk,
     publicProfileThunk,
-    registerThunk
+    registerThunk,
+    updateProfileThunk
 } from "./user-thunks";
-import {updateProfile} from './user-service';
 
 const initialState = {
     currentUser: null,
@@ -53,6 +53,14 @@ const userReducer = createSlice({
         },
         [publicProfileThunk.fulfilled]: (state, action) => {
             state.publicProfile = action.payload
+            state.loading=false
+        },
+        
+        [updateProfileThunk.pending]: (state, action) => {
+            state.loading=true
+        },
+        [updateProfileThunk.fulfilled]: (state, action) => {
+            alert('update success')
             state.loading=false
         },
     }
