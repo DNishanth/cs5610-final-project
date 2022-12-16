@@ -6,12 +6,13 @@ import {logoutThunk, publicProfileThunk} from "../login/user-thunks";
 
 import {useLocation, useParams} from "react-router";
 import {useEffect} from "react";
+import {followUserThunk} from "./follows-thunks";
 
 const PublicProfileComponent = () => {
   const {pathname} = useLocation()
   const param = pathname.split('/')
   const uid = param[param.length-1]
-  const {publicProfile} = useSelector((state) => state.users)
+  const {publicProfile, currentUser} = useSelector((state) => state.users)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -76,6 +77,13 @@ const PublicProfileComponent = () => {
                   <br/>
                   <br/>
                 </div>}
+
+            <div>Follow this user to stay up to date on the latest reviews</div>
+            <br/>
+            {currentUser &&
+                <button onClick={() => dispatch(followUserThunk({followed: uid}))}>Follow</button>
+            }
+            <br/>
             <button className="wd-logout-button"
                     onClick={() => dispatch(logoutThunk())}>Logout
             </button>

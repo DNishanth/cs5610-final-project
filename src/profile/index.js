@@ -3,10 +3,21 @@ import SearchBarComponent from "../search";
 import "./index.css";
 import {Link} from "react-router-dom";
 import {logoutThunk} from "../login/user-thunks";
+import {useEffect} from "react";
+import {getReviewsByUserIDThunk} from "../details/review-thunks";
+import {getFollowersByUserIDThunk, getFollowingByUserIDThunk} from "./follows-thunks";
 
 const ProfileComponent = () => {
     const dispatch = useDispatch();
     const {currentUser} = useSelector((state) => state.users);
+    const {followers, following} = useSelector((state) => state.follows);
+    const {user_reviews} = useSelector((state) => state.reviews);
+    useEffect(() => {
+        dispatch(getReviewsByUserIDThunk(currentUser._id));
+        dispatch(getFollowersByUserIDThunk(currentUser._id));
+        dispatch(getFollowingByUserIDThunk(currentUser._id));
+        // dispatch(getFollowersByUserIDThunk(currentUser._id));
+    }, []);
     console.log(currentUser)
     return (
         <div className="container">
@@ -71,6 +82,42 @@ const ProfileComponent = () => {
                 </div>}
                 <button className="wd-logout-button" onClick={() => dispatch(logoutThunk())}>Logout</button>
                 <br/><br/>
+
+                <ul className="list-group wd-reviews-list">
+                    <div>You are following:</div>
+                    {following && following.map(follow => (
+                        <li key={follow._id} className="list-group-item">
+                            <div>{follow.followed.username}</div>
+                            <Link to={"/profile/" + follow.followed._id} className="wd-review-link">
+                                View profile <i className="fa-solid fa-chevron-right"></i>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+
+                <ul className="list-group wd-reviews-list">
+                    <div>Your followers:</div>
+                    {followers && followers.map(follow => (
+                        <li key={follow._id} className="list-group-item">
+                            <div>{follow.follower.username}</div>
+                            <Link to={"/profile/" + follow.follower._id} className="wd-review-link">
+                                View profile <i className="fa-solid fa-chevron-right"></i>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+
+                <ul className="list-group wd-reviews-list">
+                    <div>Your reviews:</div>
+                    {user_reviews && user_reviews.slice(0, 5).map(review => (
+                        <li key={review._id} className="list-group-item">
+                            <div>{review.reviewText}</div>
+                            <Link to={"/details/" + review.workID} className="wd-review-link">
+                                Go to review <i className="fa-solid fa-chevron-right"></i>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     )
