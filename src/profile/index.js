@@ -62,9 +62,9 @@ const ProfileComponent = () => {
                     <label className="form-label mt-3 ">
                         Role:
                         <select name="role" id="" onChange={changeInput} >
-                            <option value="Reader" defaultChecked={currentUser.role === 'Reader'}>Reader</option>
-                            <option value="Author" defaultChecked={currentUser.role === 'Author'}>Author</option>
-                            <option value="Moderator" defaultChecked={currentUser.role === 'Moderator'}>Moderator</option>
+                            <option value="READER" defaultChecked={currentUser.role === 'Reader'}>Reader</option>
+                            <option value="AUTHOR" defaultChecked={currentUser.role === 'Author'}>Author</option>
+                            <option value="MODERATOR" defaultChecked={currentUser.role === 'Moderator'}>Moderator</option>
                         </select>
                     </label>
                     <br/>
