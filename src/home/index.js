@@ -85,7 +85,7 @@ const LoggedInHomeComponent = () => {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-5">
+                <div className="col-5 d-flex justify-content-start">
                     <ul className="nav nav-pills mb-2 mt-2 ms-2">
                         <h2 className="nav-item" style={{marginTop:"-11px"}}>
                             <a href="/home" className="nav-link">Athenaeum</a>
