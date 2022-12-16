@@ -16,6 +16,7 @@ import SearchPageComponent from "./search-page.js";
 import SearchResultsComponent from "./search/search-results";
 import ProtectedRoute from "./profile/protected-route";
 import CurrentUserProfile from "./profile/current-user-profile";
+import PublicProfileComponent from "./profile/public-profile-index";
 
 const store = configureStore({
     reducer: {
@@ -45,9 +46,13 @@ function App() {
                                     <ProfileComponent/>
                                 </ProtectedRoute>
                             }/>
+
+                            <Route path="/profile/:uid" element={<PublicProfileComponent/>}/>
+
                         </Routes>
                     </div>
                 </CurrentUserProfile>
+
             </BrowserRouter>
         </Provider>
     );

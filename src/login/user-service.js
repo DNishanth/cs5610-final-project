@@ -23,3 +23,18 @@ export const getProfile = async () => {
     const response = await credentialAPI.get(`${API_BASE}/profile`);
     return response.data;
 }
+
+export const updateProfile = async (user) => {
+    const response = await credentialAPI.post(`${API_BASE}/updateProfile`, user);
+    return response.data;
+}
+
+
+export const findUserById = async (uid) => {
+    console.log("inside service",uid)
+    const response = await credentialAPI.get(`${API_BASE}/register/${uid}`);
+    const user = response.data
+    console.log("Data:",user)
+    return user
+}
+

@@ -1,5 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loginThunk, logoutThunk, profileThunk, registerThunk} from "./user-thunks";
+import {
+    loginThunk,
+    logoutThunk,
+    profileThunk,
+    publicProfileThunk,
+    registerThunk
+} from "./user-thunks";
+import {updateProfile} from './user-service';
 
 const initialState = {
     currentUser: null,
@@ -9,6 +16,13 @@ const initialState = {
 const userReducer = createSlice({
     name: 'users',
     initialState: initialState,
+    reducers: {
+
+        updateUserInfo: (state, action) => {
+            console.log('update', state, action)
+            state.currentUser = action.payload
+        }
+    },
     extraReducers: {
         [registerThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;
@@ -34,7 +48,15 @@ const userReducer = createSlice({
         [profileThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;
         },
+        [publicProfileThunk.pending]: (state, action) => {
+            state.loading=true
+        },
+        [publicProfileThunk.fulfilled]: (state, action) => {
+            state.publicProfile = action.payload
+            state.loading=false
+        },
     }
 })
+export const { updateUserInfo } = userReducer.actions
 
 export default userReducer.reducer;
