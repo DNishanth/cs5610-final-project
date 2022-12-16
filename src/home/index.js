@@ -192,7 +192,7 @@ const ReaderHomeComponent = () => {
 
 const AuthorHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
-    const {user_reviews} = useSelector((state) => state.reviews);
+    const {recent_reviews} = useSelector((state) => state.reviews);
     const {user_posts} = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -239,12 +239,11 @@ const AuthorHomeComponent = () => {
                     <h1>Welcome back to Athenaeum, {currentUser.username}!</h1><br/><br/>
                     <h2 className="wd-about-heading" align="left">Trending Reviews:</h2>
                     <ul className="list-group wd-reviews-list">
-                        {/*Slice limits the reviews displayed*/}
-                        {user_reviews && user_reviews.slice(0, 5).map(review => (
-                            <li key={review._id} className="list-group-item">
+                        {recent_reviews && recent_reviews.slice(0, 3).map(review => (
+                            <li key={review._id} className="list-group-item wd-profile-reviews">
                                 <div>{review.reviewText}</div>
                                 <Link to={"/details/" + review.workID} className="wd-review-link">
-                                    Go to review <i class="fa-solid fa-chevron-right"></i>
+                                    Go to review <i className="fa-solid fa-chevron-right"></i>
                                 </Link>
                             </li>
                         ))}
