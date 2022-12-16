@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {logoutThunk} from "../login/user-thunks";
 import {useEffect} from "react";
-import {getReviewsByUserIDThunk} from "../details/review-thunks";
+import {getReviewsByUserIDThunk, getReviewsThunk} from "../details/review-thunks";
 import { getPostsByUserIDThunk } from "../details/post-thunks";
 
 // NOT logged in home screen
