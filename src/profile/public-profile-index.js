@@ -6,13 +6,12 @@ import {logoutThunk, publicProfileThunk} from "../login/user-thunks";
 
 import {useLocation, useParams} from "react-router";
 import {useEffect} from "react";
-import {followUserThunk} from "./follows-thunks";
 
 const PublicProfileComponent = () => {
   const {pathname} = useLocation()
   const param = pathname.split('/')
   const uid = param[param.length-1]
-  const {publicProfile, currentUser} = useSelector((state) => state.users)
+  const {publicProfile} = useSelector((state) => state.users)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,9 +19,9 @@ const PublicProfileComponent = () => {
     console.log(uid,"\n",publicProfile);
   }, [uid])
   return (
-      <div className="container">
-        <div className="row d-flex justify-content-between">
-          <div className="col-5 justify-content-start">
+      <div className="wd-profile-page">
+        <div className="row">
+          <div className="col-6">
             <ul className="nav nav-pills mb-2 mt-2 ms-2">
               <h2 className="nav-item" style={{marginTop:"-11px"}}>
                 <a href="/home" className="nav-link">Athenaeum</a>
@@ -77,13 +76,6 @@ const PublicProfileComponent = () => {
                   <br/>
                   <br/>
                 </div>}
-
-            <div>Follow this user to stay up to date on the latest reviews</div>
-            <br/>
-            {currentUser &&
-                <button className="wd-logout-button" onClick={() => dispatch(followUserThunk({followed: uid}))}>Follow</button>
-            }
-            <br/><br/>
             <button className="wd-logout-button"
                     onClick={() => dispatch(logoutThunk())}>Logout
             </button>
