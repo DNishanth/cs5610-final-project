@@ -49,9 +49,9 @@ const ReaderDetailsComponent = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <div className="row">
-                <div className="col-6">
+                <div className="col-5 d-flex-justify-content-between">
                     <ul className="nav nav-pills mb-2 mt-2 ms-2">
                         <h2 className="nav-item" style={{marginTop:"-11px"}}>
                             <a href="/home" className="nav-link">Athenaeum</a>
@@ -62,10 +62,10 @@ const ReaderDetailsComponent = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a href="/search" className="nav-link ">Search</a>
+                            <a href="/search" className="nav-link active">Search</a>
                         </li>
                         <li className="nav-item">
-                            <a href="/profile" className="nav-link active">Profile</a>
+                            <a href="/profile" className="nav-link">Profile</a>
                         </li>
 
                     </ul>
@@ -185,9 +185,9 @@ const ReaderDetailsComponent = () => {
         }
     
         return (
-            <div>
-                <div className="row">
-                    <div className="col-6">
+            <div className="container">
+                <div className="row d-flex justify-content-between">
+                    <div className="col-5 d-flex justify-content-start">
                         <ul className="nav nav-pills mb-2 mt-2 ms-2">
                             <h2 className="nav-item" style={{marginTop:"-11px"}}>
                                 <a href="/home" className="nav-link">Athenaeum</a>
@@ -198,10 +198,10 @@ const ReaderDetailsComponent = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <a href="/search" className="nav-link ">Search</a>
+                                <a href="/search" className="nav-link active">Search</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/profile" className="nav-link active">Profile</a>
+                                <a href="/profile" className="nav-link">Profile</a>
                             </li>
 
                         </ul>
@@ -315,9 +315,9 @@ const ModeratorDetailsComponent = () => {
     }
         
     return (
-        <div>
-            <div className="row">
-                <div className="col-6">
+        <div class="container">
+            <div className="row d-flex justify-content-between">
+                <div className="col-5 d-flex justify-content-start">
                     <ul className="nav nav-pills mb-2 mt-2 ms-2">
                         <h2 className="nav-item" style={{marginTop:"-11px"}}>
                             <a href="/home" className="nav-link">Athenaeum</a>
@@ -328,10 +328,10 @@ const ModeratorDetailsComponent = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a href="/search" className="nav-link ">Search</a>
+                            <a href="/search" className="nav-link active">Search</a>
                         </li>
                         <li className="nav-item">
-                            <a href="/profile" className="nav-link active">Profile</a>
+                            <a href="/profile" className="nav-link">Profile</a>
                         </li>
 
                     </ul>
@@ -432,7 +432,7 @@ const LoggedOutDetailsComponent = () => {
     return (
         <div>
             <div className="row d-flex justify-content-between">
-                <div className="col-6">
+                <div className="col-5">
                     <ul className="nav nav-pills mb-2 mt-2 ms-2">
                         <h2 className="nav-item" style={{marginTop:"-11px"}}>
                             <a href="/home" className="nav-link">Athenaeum</a>
@@ -448,7 +448,10 @@ const LoggedOutDetailsComponent = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="col-3">
+                <div className="col-5 mt-1 wd-searchbar" align="center">
+                    <SearchBarComponent/>
+                </div>
+                <div className="col-2">
                     <ul className="nav nav-pills mb-2 mt-2 ms-5">
                         <li className="nav-item">
                             <a href="/login" className="nav-link">Login</a>
