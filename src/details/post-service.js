@@ -23,3 +23,8 @@ export const deletePost = async (postID) => {
     const response = await axios.delete(`${POST_API_BASE}/${postID}`);
     return response.data;
 }
+
+export const getPosts = async () => {
+    const response = await axios.get(`${POST_API_BASE}`);
+    return response.data;
+}

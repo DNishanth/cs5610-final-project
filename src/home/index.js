@@ -6,16 +6,18 @@ import {Link} from "react-router-dom";
 import {logoutThunk} from "../login/user-thunks";
 import {useEffect} from "react";
 import {getReviewsByUserIDThunk, getReviewsThunk} from "../details/review-thunks";
-import { getPostsByUserIDThunk } from "../details/post-thunks";
+import { getPostsByUserIDThunk, getPostsThunk } from "../details/post-thunks";
 
 // NOT logged in home screen
 const LoggedOutHomeComponent = () => {
     const {currentUser} = useSelector((state) => state.users);
     const {recent_reviews} = useSelector((state) => state.reviews);
+    const {recent_posts} = useSelector((state) => state.posts);
     console.log(currentUser);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getReviewsThunk());
+        dispatch(getPostsThunk());
         // dispatch(getFollowersByUserIDThunk(currentUser._id));
     }, []);
     return (
@@ -79,12 +81,24 @@ const LoggedOutHomeComponent = () => {
                         <p>Search our online library for your favorite literary works!</p>
                     </div>
                     <ul className="list-group wd-reviews-list">
-                        <div className="wd-trending-heading">Trending Reviews</div><br/>
+                        <div className="wd-trending-heading">Trending Reviews:</div><br/>
                         {recent_reviews && recent_reviews.slice(0, 3).map(review => (
                             <li key={review._id} className="list-group-item wd-profile-reviews">
                                 <div>{review.reviewText}</div>
                                 <Link to={"/details/" + review.workID} className="wd-review-link">
                                     Go to review <i className="fa-solid fa-chevron-right"></i>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <br/><br/>
+                    <ul className="list-group wd-reviews-list">
+                        <div className="wd-trending-heading">Trending Discussion Posts:</div><br/>
+                        {recent_posts && recent_posts.slice(0, 3).map(post => (
+                            <li key={post._id} className="list-group-item wd-profile-reviews">
+                                <div>{post.postText}</div>
+                                <Link to={"/details/" + post.workID} className="wd-review-link">
+                                    Go to post <i className="fa-solid fa-chevron-right"></i>
                                 </Link>
                             </li>
                         ))}
